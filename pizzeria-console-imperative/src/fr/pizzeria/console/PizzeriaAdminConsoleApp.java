@@ -49,7 +49,13 @@ public class PizzeriaAdminConsoleApp {
 	
 	public static void ajouterPizza(String code, String nom, double prix)
 	{
+		Object[][] pizzasTab = getTablaeauPizzas();
+		int taille = pizzasTab.length;
 		
+//		if (pizzasTab.) 
+//		{
+//			
+//		}
 	}
 	
 	
