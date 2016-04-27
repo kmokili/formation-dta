@@ -2,6 +2,8 @@ package fr.pizzeria.console;
 
 import java.util.Scanner;
 
+import fr.pizzeria.model.Pizza;
+
 public class PizzeriaAdminConsoleApp {
 
 	private static Object[][] getTableauPizzas() {
@@ -15,6 +17,25 @@ public class PizzeriaAdminConsoleApp {
 		pizzas[6] = new Object[] { "ORI", "L'orientale", 13.50 };
 		pizzas[7] = new Object[] { "IND", "L'indienne", 14.00 };
 		return pizzas;
+	}
+	
+	
+	public static Pizza creerObjetPizza(String code, String nom, double prix)
+	{
+		Pizza p = new Pizza();
+		p.code = code;
+		p.nom = nom;
+		p.prix = prix;
+		Pizza.nbPizzas++;
+		return p;
+		
+	}
+	
+	private static Pizza[] getTableauPizzas2() {
+		Pizza[] pizzas = new Pizza[100];
+		pizzas[0] = creerObjetPizza("PEP", "Pépéroni", 12.50);
+		return pizzas;
+		
 	}
 
 	public static void main(String[] args) {
