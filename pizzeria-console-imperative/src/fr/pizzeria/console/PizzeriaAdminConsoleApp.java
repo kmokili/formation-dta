@@ -40,7 +40,7 @@ public class PizzeriaAdminConsoleApp {
 		for (int i = 0; i < taille; i++) {
 			Object codePizza = tab[i][0];
 			if (codePizza != null) {
-				System.out.println(codePizza + " -> " + tab[i][1] + "(" + tab[i][2] + ")");
+				System.out.println(codePizza + " -> " + tab[i][1] + "(" + tab[i][2] + "€)");
 			}
 		}
 		
@@ -52,10 +52,19 @@ public class PizzeriaAdminConsoleApp {
 		Object[][] pizzasTab = getTablaeauPizzas();
 		int taille = pizzasTab.length;
 		
-//		if (pizzasTab.) 
-//		{
-//			
-//		}
+		int i = 0 ;
+		boolean paslibre = true;
+		while ((i < taille) && (paslibre)) 
+		{
+			Object codePizza = pizzasTab[i][0];
+			if (codePizza != null) 
+			{
+				paslibre = false;
+				pizzasTab[i] =  new Object[] {code, nom, prix};
+			}
+			i++;
+		}
+
 	}
 	
 	
@@ -93,6 +102,19 @@ public class PizzeriaAdminConsoleApp {
 			case 2:
 				{
 					System.out.println("\nAjout d’une nouvelle pizza\n");
+					System.out.println("\nVeuillez saisir le code\n");
+					
+					String code = sc.next();
+					
+					System.out.println("\nVeuillez saisir le nom (sans espace)\n");
+					
+					String nom = sc.next();
+					
+					System.out.println("\nVeuillez saisir le prix\n");
+					
+					double prix = sc.nextDouble();
+					
+					ajouterPizza(code, nom, prix);
 				}
 			break;
 			
