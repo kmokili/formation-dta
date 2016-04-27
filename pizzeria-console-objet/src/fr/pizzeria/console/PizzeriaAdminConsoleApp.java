@@ -6,19 +6,19 @@ import fr.pizzeria.model.Pizza;
 
 public class PizzeriaAdminConsoleApp {
 
-	private static Object[][] getTableauPizzas() {
-		Object[][] pizzas = new Object[100][3];
-		pizzas[0] = new Object[] { "PEP", "Pépéroni", 12.50 };
-		pizzas[1] = new Object[] { "MAR", "Margherita", 14.00 };
-		pizzas[2] = new Object[] { "REI", "La Reine", 11.50 };
-		pizzas[3] = new Object[] { "FRO", "La 4 fromages", 12.00 };
-		pizzas[4] = new Object[] { "CAN", "La cannibale", 12.50 };
-		pizzas[5] = new Object[] { "SAV", "La savoyarde", 13.00 };
-		pizzas[6] = new Object[] { "ORI", "L'orientale", 13.50 };
-		pizzas[7] = new Object[] { "IND", "L'indienne", 14.00 };
-		return pizzas;
-	}
-	
+//	private static Object[][] getTableauPizzas() {
+//		Object[][] pizzas = new Object[100][3];
+//		pizzas[0] = new Object[] { "PEP", "Pépéroni", 12.50 };
+//		pizzas[1] = new Object[] { "MAR", "Margherita", 14.00 };
+//		pizzas[2] = new Object[] { "REI", "La Reine", 11.50 };
+//		pizzas[3] = new Object[] { "FRO", "La 4 fromages", 12.00 };
+//		pizzas[4] = new Object[] { "CAN", "La cannibale", 12.50 };
+//		pizzas[5] = new Object[] { "SAV", "La savoyarde", 13.00 };
+//		pizzas[6] = new Object[] { "ORI", "L'orientale", 13.50 };
+//		pizzas[7] = new Object[] { "IND", "L'indienne", 14.00 };
+//		return pizzas;
+//	}
+//	
 	
 	public static Pizza creerObjetPizza(String code, String nom, double prix)
 	{
@@ -31,9 +31,16 @@ public class PizzeriaAdminConsoleApp {
 		
 	}
 	
-	private static Pizza[] getTableauPizzas2() {
+	private static Pizza[] getTableauPizzas() {
 		Pizza[] pizzas = new Pizza[100];
 		pizzas[0] = creerObjetPizza("PEP", "Pépéroni", 12.50);
+		pizzas[1] = creerObjetPizza("MAR", "Margherita", 14.00);
+		pizzas[2] = creerObjetPizza("REI", "La Reine", 11.50);
+		pizzas[3] = creerObjetPizza("FRO", "La 4 fromages", 12.00);
+		pizzas[4] = creerObjetPizza("CAN", "La cannibale", 12.50);
+		pizzas[5] = creerObjetPizza("SAV", "La savoyarde", 13.00);
+		pizzas[6] = creerObjetPizza("ORI", "L'orientale", 13.50);
+		pizzas[7] = creerObjetPizza("IND", "L'indienne", 14.00);
 		return pizzas;
 		
 	}
@@ -42,7 +49,7 @@ public class PizzeriaAdminConsoleApp {
 
 		Scanner sc = new Scanner(System.in);
 
-		Object[][] pizzas = getTableauPizzas();
+		Pizza[] pizzas = getTableauPizzas();
 
 		int saisie = 0;
 		do {
@@ -81,17 +88,17 @@ public class PizzeriaAdminConsoleApp {
 		System.out.println("99. Sortir");
 	}
 
-	private static void listerPizzas(Object[][] pizzas) {
+	private static void listerPizzas(Pizza[] pizzas) {
 		System.out.println("Liste des pizzas");
 		afficherListePizzas(pizzas);
 	}
 
-	private static void ajouterNouvellePizza(Scanner sc, Object[][] pizzas) {
+	private static void ajouterNouvellePizza(Scanner sc, Pizza[] pizzas) {
 		System.out.println("Ajout d’une nouvelle pizza");
 		boolean placeTrouve = false;
 		int index = 0;
 		while (!placeTrouve && index < pizzas.length) {
-			placeTrouve = pizzas[index][0] == null;
+			placeTrouve = pizzas[index] == null;
 			index++;
 		}
 
@@ -102,7 +109,7 @@ public class PizzeriaAdminConsoleApp {
 		}
 	}
 
-	private static void MettreAJourUnePizza(Scanner sc, Object[][] pizzas) {
+	private static void MettreAJourUnePizza(Scanner sc, Pizza[] pizzas) {
 		System.out.println("Mise à jour d’une pizza");
 		afficherListePizzas(pizzas);
 		System.out.println("Veuillez choisir la pizza a modifier. (99 pour abandonner)");
@@ -118,7 +125,7 @@ public class PizzeriaAdminConsoleApp {
 		}
 	}
 
-	private static void supprimerPizza(Scanner sc, Object[][] pizzas) {
+	private static void supprimerPizza(Scanner sc, Pizza[] pizzas) {
 		System.out.println("Suppression d’une pizza");
 		afficherListePizzas(pizzas);
 		System.out.println("Veuillez choisir la pizza à supprimer. (99 pour abandonner)");
@@ -127,25 +134,25 @@ public class PizzeriaAdminConsoleApp {
 		boolean pizzaTrouve = (boolean) resultatRecherche[0];
 		int indexPizzaTrouve = (int) resultatRecherche[1];
 		if (pizzaTrouve) {
-			pizzas[indexPizzaTrouve] = new Object[3];
+			pizzas[indexPizzaTrouve] = creerObjetPizza(null, null, 0);
 		} else {
 			System.err.println("Code pizza non trouvé");
 		}
 	}
 
-	private static void afficherListePizzas(Object[][] pizzas) {
+	private static void afficherListePizzas(Pizza[] pizzas) {
 		for (int i = 0; i < pizzas.length; i++) {
-			if (pizzas[i][0] != null) {
-				System.out.println(pizzas[i][0] + " -> " + pizzas[i][1] + " (" + pizzas[i][2] + ")");
+			if (pizzas[i] != null) {
+				System.out.println(pizzas[i].code + " -> " + pizzas[i].nom + " (" + pizzas[i].prix + "€)");
 			}
 		}
 	}
 
-	private static Object[] rechercherPizza(Object[][] pizzas, String codePizza) {
+	private static Object[] rechercherPizza(Pizza[] pizzas, String codePizza) {
 		boolean pizzaTrouve = false;
 		int indexPizzaTrouve = 0;
 		while (!pizzaTrouve && indexPizzaTrouve < pizzas.length) {
-			pizzaTrouve = codePizza.equals(pizzas[indexPizzaTrouve][0]);
+			pizzaTrouve = codePizza.equals(pizzas[indexPizzaTrouve]);
 			if (!pizzaTrouve) {
 				indexPizzaTrouve++;
 			}
@@ -153,13 +160,13 @@ public class PizzeriaAdminConsoleApp {
 		return new Object[] { pizzaTrouve, indexPizzaTrouve };
 	}
 
-	private static Object[] saisirDonneesPizza(Scanner sc) {
+	private static Pizza saisirDonneesPizza(Scanner sc) {
 		System.out.println("Veuillez saisir le code");
 		String newCode = sc.next();
 		System.out.println("Veuillez saisir le nom (sans espace)");
 		String newNom = sc.next();
 		System.out.println("Veuillez saisir le prix");
 		double newPrix = sc.nextDouble();
-		return new Object[] { newCode, newNom, newPrix };
+		return creerObjetPizza(newCode, newNom, newPrix);
 	}
 }
