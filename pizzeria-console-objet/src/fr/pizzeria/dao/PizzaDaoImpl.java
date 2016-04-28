@@ -1,5 +1,8 @@
 package fr.pizzeria.dao;
 
+import fr.pizzeria.exception.DeletePizzaException;
+import fr.pizzeria.exception.SavePizzaException;
+import fr.pizzeria.exception.UpdatePizzaException;
 import fr.pizzeria.model.Pizza;
 
 public class PizzaDaoImpl implements IPizzaDao {
@@ -31,7 +34,7 @@ public class PizzaDaoImpl implements IPizzaDao {
 	}
 
 	@Override
-	public boolean savePizza(Pizza newPizza) {
+	public void savePizza(Pizza newPizza) throws SavePizzaException {
 		boolean placeTrouve = false;
 		int index = 0;
 		while (!placeTrouve && index < pizzas.length) {
@@ -44,27 +47,31 @@ public class PizzaDaoImpl implements IPizzaDao {
 
 		if (placeTrouve) {
 			pizzas[index] = newPizza;
+		} else {
+			throw new SavePizzaException();
 		}
 		
-		return placeTrouve;
 	}
 
 	@Override
-	public boolean updatePizza(String codePizza, Pizza updatePizza) {
+	public void updatePizza(String codePizza, Pizza updatePizza) throws UpdatePizzaException {
 		ResultatRecherche resultatRecherche = rechercherPizza(codePizza);
 		if (resultatRecherche.pizzaTrouve) {
 			pizzas[resultatRecherche.indexPizzaTrouve] = updatePizza;
+		} else {
+			throw new UpdatePizzaException();
 		}
-		return resultatRecherche.pizzaTrouve;
 	}
 
 	@Override
-	public boolean deletePizza(String codePizza) {
+	public void deletePizza(String codePizza) throws DeletePizzaException {
 		ResultatRecherche resultatRecherche = rechercherPizza(codePizza);
 		if (resultatRecherche.pizzaTrouve) {
 			pizzas[resultatRecherche.indexPizzaTrouve] = null;
+		} else {
+			throw new DeletePizzaException();
 		}
-		return resultatRecherche.pizzaTrouve;
+		
 	}
 	
 	private ResultatRecherche rechercherPizza(String codePizza) {

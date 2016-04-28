@@ -3,6 +3,7 @@ package fr.pizzeria.ihm.menu.option;
 import java.util.Scanner;
 
 import fr.pizzeria.dao.IPizzaDao;
+import fr.pizzeria.exception.UpdatePizzaException;
 import fr.pizzeria.model.Pizza;
 
 public class MettreAJourPizzaOptionMenu extends AbstractOptionMenu {
@@ -18,7 +19,7 @@ public class MettreAJourPizzaOptionMenu extends AbstractOptionMenu {
 
 		new ListerPizzaOptionMenu(pizzaDao).execute();
 		
-		System.out.println("Veuillez choisir la pizza aÌ€ modifier. (99 pour abandonner)");
+		System.out.println("Veuillez choisir la pizza à modifier. (99 pour abandonner)");
 		String codePizza = sc.next();
 		
 		Pizza updatePizza = new Pizza();
@@ -28,13 +29,13 @@ public class MettreAJourPizzaOptionMenu extends AbstractOptionMenu {
 		updatePizza.setNom(sc.next());
 		System.out.println("Veuillez saisir le prix");
 		updatePizza.setPrix(sc.nextDouble());
-	
-		boolean resultat = pizzaDao.updatePizza(codePizza, updatePizza);
 
-		if (resultat) {
-			System.out.println("Pizza mise Ã  jour");
-		} else {
-			System.err.println("Echec mise Ã  jour pizza");
+
+		try {
+			pizzaDao.updatePizza(codePizza, updatePizza);
+			System.out.println("Pizza mise à jour");
+		} catch (UpdatePizzaException upe) {
+			System.err.println("Echec mise à jour pizza");
 		}
 
 		return true;
