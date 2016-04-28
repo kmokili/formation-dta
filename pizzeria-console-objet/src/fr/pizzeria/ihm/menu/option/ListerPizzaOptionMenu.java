@@ -23,13 +23,7 @@ public class ListerPizzaOptionMenu extends AbstractOptionMenu {
 				System.out.println(p.getCode() + " -> " + p.getNom() + " (" + p.getPrix() + ")");
 			}
 		}
-		/*
-		for (int i = 0; i < pizzas.length; i++) {
-			if (pizzas[i] != null) {
-				System.out.println(pizzas[i].code + " -> " + pizzas[i].nom + " (" + pizzas[i].prix + ")");
-			}
-		}
-		*/
+		
 		return true;
 	}
 

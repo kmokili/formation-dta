@@ -7,36 +7,36 @@ import fr.pizzeria.model.Pizza;
 
 public class MettreAJourPizzaOptionMenu extends AbstractOptionMenu {
 
-	private static final String METTRE_A_JOUR_PIZZA_LIBELLE_MENU = "Mettre à jour une pizza";
-	
+	private static final String MAJ_PIZZA_LIBELLE_MENU = "Mettre Ã  jour une Pizza";
+
 	public MettreAJourPizzaOptionMenu(Scanner scanner, IPizzaDao pizzaDao) {
-		super(METTRE_A_JOUR_PIZZA_LIBELLE_MENU, pizzaDao, scanner);
-		// TODO Auto-generated constructor stub
+		super(MAJ_PIZZA_LIBELLE_MENU, pizzaDao, scanner);
 	}
 
-	
-	
 	@Override
 	public boolean execute() {
+
+		new ListerPizzaOptionMenu(pizzaDao).execute();
 		
+		System.out.println("Veuillez choisir la pizza aÌ€ modifier. (99 pour abandonner)");
+		String codePizza = sc.next();
 		
-		
-		Pizza newPizza = new Pizza();
-		System.out.println("Veuillez saisir le code de la pizza à mettre à jour");
-		newPizza.setCode(sc.next());
-		System.out.println("Veuillez saisir le nouveau nom (sans espace)");
-		newPizza.setNom(sc.next());
-		System.out.println("Veuillez saisir le nouveau prix");
-		newPizza.setPrix(sc.nextDouble());
-		
-		boolean resultat = pizzaDao.savePizza(newPizza);
-		
+		Pizza updatePizza = new Pizza();
+		System.out.println("Veuillez saisir le code");
+		updatePizza.setCode(sc.next());
+		System.out.println("Veuillez saisir le nom (sans espace)");
+		updatePizza.setNom(sc.next());
+		System.out.println("Veuillez saisir le prix");
+		updatePizza.setPrix(sc.nextDouble());
+	
+		boolean resultat = pizzaDao.updatePizza(codePizza, updatePizza);
+
 		if (resultat) {
-			System.out.println("Nouvelle pizza créée");
+			System.out.println("Pizza mise Ã  jour");
 		} else {
-			System.err.println("Echec création de pizza");
+			System.err.println("Echec mise Ã  jour pizza");
 		}
-		
+
 		return true;
 	}
 

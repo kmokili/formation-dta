@@ -4,10 +4,11 @@ import java.util.Scanner;
 
 import fr.pizzeria.dao.IPizzaDao;
 import fr.pizzeria.ihm.menu.option.AbstractOptionMenu;
+import fr.pizzeria.ihm.menu.option.AjouterNouvellePizzaOptionMenu;
 import fr.pizzeria.ihm.menu.option.ListerPizzaOptionMenu;
 import fr.pizzeria.ihm.menu.option.MettreAJourPizzaOptionMenu;
-import fr.pizzeria.ihm.menu.option.NouvellePizzaOptionMenu;
 import fr.pizzeria.ihm.menu.option.QuitterOptionMenu;
+import fr.pizzeria.ihm.menu.option.SupprimerPizzaOptionMenu;
 
 public class Menu {
 
@@ -15,7 +16,7 @@ public class Menu {
 	private AbstractOptionMenu[] options;
 	private Scanner sc;
 
-	public Menu(Scanner sc,IPizzaDao pizzaDao) {
+	public Menu(Scanner sc, IPizzaDao pizzaDao) {
 		super();
 		initialiserOptions(sc, pizzaDao);
 		this.sc = sc;
@@ -24,17 +25,18 @@ public class Menu {
 	private void initialiserOptions(Scanner scanner, IPizzaDao pizzaDao) {
 		options = new AbstractOptionMenu[] { 
 				new ListerPizzaOptionMenu(pizzaDao),
-				new NouvellePizzaOptionMenu(sc, pizzaDao),
-				new MettreAJourPizzaOptionMenu(sc, pizzaDao),
+				new AjouterNouvellePizzaOptionMenu(scanner, pizzaDao),
+				new MettreAJourPizzaOptionMenu(scanner, pizzaDao),
+				new SupprimerPizzaOptionMenu(scanner, pizzaDao),
 				new QuitterOptionMenu()
-				};
+		};
 	}
-	
+
 	public void afficher() {
 		boolean continuer = true;
-		while(continuer) {
+		while (continuer) {
 			System.out.println("**** " + MENU_TITRE_LIBELLE + " ****");
-			
+
 			for (int i = 0; i < options.length; i++) {
 				AbstractOptionMenu opt = options[i];
 				System.out.println(i + ". " + opt.getLibelle());
