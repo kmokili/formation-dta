@@ -29,8 +29,21 @@ public class PizzaDaoImpl implements IPizzaDao {
 
 	@Override
 	public boolean savePizza(Pizza newPizza) {
-		// TODO Auto-generated method stub
-		return false;
+		System.out.println("Ajout d’une nouvelle pizza");
+		boolean placeTrouve = false;
+		int index = 0;
+		while (!placeTrouve && index < pizzas.length) {
+			placeTrouve = pizzas[index] == null;
+			index++;
+		}
+
+		if (placeTrouve) {
+			pizzas[index] = newPizza;
+			Pizza.nbPizzas++;
+		} else {
+			System.err.println("Plus de place pour une nouvelle pizza");
+		}
+		return placeTrouve;
 	}
 
 	@Override
