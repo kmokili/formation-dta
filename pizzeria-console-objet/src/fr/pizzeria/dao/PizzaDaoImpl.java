@@ -29,7 +29,7 @@ public class PizzaDaoImpl implements IPizzaDao {
 
 	@Override
 	public boolean savePizza(Pizza newPizza) {
-		System.out.println("Ajout d’une nouvelle pizza");
+		System.out.println("Ajout d'une nouvelle pizza");
 		boolean placeTrouve = false;
 		int index = 0;
 		while (!placeTrouve && index < pizzas.length) {
@@ -48,7 +48,7 @@ public class PizzaDaoImpl implements IPizzaDao {
 
 	@Override
 	public boolean updatePizza(String codePizza, Pizza updatePizza) {
-		// TODO Auto-generated method stub
+		
 		return false;
 	}
 

@@ -5,6 +5,7 @@ import java.util.Scanner;
 import fr.pizzeria.dao.IPizzaDao;
 import fr.pizzeria.ihm.menu.option.AbstractOptionMenu;
 import fr.pizzeria.ihm.menu.option.ListerPizzaOptionMenu;
+import fr.pizzeria.ihm.menu.option.MettreAJourPizzaOptionMenu;
 import fr.pizzeria.ihm.menu.option.NouvellePizzaOptionMenu;
 import fr.pizzeria.ihm.menu.option.QuitterOptionMenu;
 
@@ -24,6 +25,7 @@ public class Menu {
 		options = new AbstractOptionMenu[] { 
 				new ListerPizzaOptionMenu(pizzaDao),
 				new NouvellePizzaOptionMenu(sc, pizzaDao),
+				new MettreAJourPizzaOptionMenu(sc, pizzaDao),
 				new QuitterOptionMenu()
 				};
 	}
