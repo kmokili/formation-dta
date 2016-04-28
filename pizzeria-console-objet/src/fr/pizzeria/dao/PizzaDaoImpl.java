@@ -15,7 +15,7 @@ public class PizzaDaoImpl implements IPizzaDao {
 	private Pizza[] pizzas = new Pizza[100];
 
 	public PizzaDaoImpl() {
-		pizzas[0] = new Pizza("PEP", "PÃ©pÃ©roni", 12.50);
+		pizzas[0] = new Pizza("PEP", "Pépéroni", 12.50);
 		pizzas[1] = new Pizza("MAR", "Margherita", 14.00);
 		pizzas[2] = new Pizza("REI", "La Reine", 11.50);
 		pizzas[3] = new Pizza("FRO", "La 4 fromages", 12.00);
