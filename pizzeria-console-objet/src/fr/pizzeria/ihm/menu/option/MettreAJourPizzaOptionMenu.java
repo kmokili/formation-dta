@@ -8,7 +8,7 @@ import fr.pizzeria.model.Pizza;
 
 public class MettreAJourPizzaOptionMenu extends AbstractOptionMenu {
 
-	private static final String MAJ_PIZZA_LIBELLE_MENU = "Mettre Ã  jour une Pizza";
+	private static final String MAJ_PIZZA_LIBELLE_MENU = "Mettre à jour une Pizza";
 
 	public MettreAJourPizzaOptionMenu(Scanner scanner, IPizzaDao pizzaDao) {
 		super(MAJ_PIZZA_LIBELLE_MENU, pizzaDao, scanner);
