@@ -1,6 +1,6 @@
 package fr.pizzeria.model;
 
-public class Pizza {
+public class Pizza implements Comparable<Pizza>{
 
 	private int id;
 	private String code;
@@ -51,6 +51,13 @@ public class Pizza {
 
 	public void setPrix(double prix) {
 		this.prix = prix;
+	}
+
+
+	@Override
+	public int compareTo(Pizza o) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 }
