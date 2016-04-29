@@ -7,6 +7,7 @@ public class Pizza {
 	private String nom;
 	private double prix;
 	public static int nbPizzas;
+	private CategoriePizza categorie;
 
 	public Pizza() {
 		// this("jjj","hhhh",12.0);
@@ -19,6 +20,14 @@ public class Pizza {
 		this.code = code;
 		this.nom = nom;
 		this.prix = prix;
+	}
+	
+	public Pizza(String code, String nom, double prix, CategoriePizza categorie) {
+		this();
+		this.code = code;
+		this.nom = nom;
+		this.prix = prix;
+		this.categorie = categorie;
 	}
 
 	public int getId() {

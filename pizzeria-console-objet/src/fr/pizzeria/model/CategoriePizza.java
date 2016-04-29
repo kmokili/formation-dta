@@ -5,6 +5,10 @@ public enum CategoriePizza {
 	
 	private String libelle;
 
+	public String getLibelle() {
+		return libelle;
+	}
+
 	private CategoriePizza(String libelle)
 	{
 		this.libelle = libelle;
