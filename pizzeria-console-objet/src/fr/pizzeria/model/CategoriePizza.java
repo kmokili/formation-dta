@@ -13,4 +13,10 @@ public enum CategoriePizza {
 	{
 		this.libelle = libelle;
 	}
+	
+	@Override
+	public String toString()
+	{
+		return libelle;
+	}
 }

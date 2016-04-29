@@ -89,7 +89,15 @@ public class Pizza {
 					{
 						boolean uppercase = annotation.uppercase();
 						Object valeurDuChamp = f.get(this);
-						value += uppercase ? valeurDuChamp.toString().toUpperCase() : valeurDuChamp + " ";
+						
+//						if (valeurDuChamp instanceof CategoriePizza) {
+//							CategoriePizza cat = (CategoriePizza) valeurDuChamp;
+//							value += uppercase ? cat.getLibelle().toUpperCase() : cat.getLibelle() + " ";
+//						} else {
+//							value += uppercase ? valeurDuChamp.toString().toUpperCase() : valeurDuChamp + " ";
+//						}
+//						
+						value += (uppercase ? valeurDuChamp.toString().toUpperCase() : valeurDuChamp) + " ";
 					}
 				} catch (IllegalArgumentException | IllegalAccessException e) {
 					e.printStackTrace();
