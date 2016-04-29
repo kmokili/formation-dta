@@ -1,96 +1,69 @@
 package fr.pizzeria.dao;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import fr.pizzeria.exception.DeletePizzaException;
 import fr.pizzeria.exception.SavePizzaException;
 import fr.pizzeria.exception.UpdatePizzaException;
+import fr.pizzeria.model.CategoriePizza;
 import fr.pizzeria.model.Pizza;
 
 public class PizzaDaoImpl implements IPizzaDao {
 	
-	private static class ResultatRecherche {
-		boolean pizzaTrouve;
-		int indexPizzaTrouve;
-	}
-	
-	private Pizza[] pizzas = new Pizza[100];
+	/*
+	 * Pratique pour retrouver facilement et rapidement une pizza
+	 */
+	private Map<String, Pizza> pizzas = new HashMap<String, Pizza>();
 
 	public PizzaDaoImpl() {
-		pizzas[0] = new Pizza("PEP", "P√©p√©roni", 12.50);
-		pizzas[1] = new Pizza("MAR", "Margherita", 14.00);
-		pizzas[2] = new Pizza("REI", "La Reine", 11.50);
-		pizzas[3] = new Pizza("FRO", "La 4 fromages", 12.00);
-		pizzas[4] = new Pizza("CAN", "La cannibale", 12.50);
-		pizzas[5] = new Pizza("SAV", "La savoyarde", 13.00);
-		pizzas[6] = new Pizza("ORI", "L'orientale", 13.50);
-		pizzas[7] = new Pizza("IND", "L'indienne", 14.00);
+		pizzas.put("PEP", new Pizza("PEP", "Peperoni", 12.50, CategoriePizza.VIANDE));
+		pizzas.put("MAR", new Pizza("MAR", "Margherita", 14.00, CategoriePizza.SANS_VIANDE));
+		pizzas.put("REI", new Pizza("REI", "La Reine", 11.50, CategoriePizza.VIANDE));
+		pizzas.put("FRO", new Pizza("FRO", "La 4 fromages", 12.00, CategoriePizza.SANS_VIANDE));
+		pizzas.put("CAN", new Pizza("CAN", "La cannibale", 12.50, CategoriePizza.VIANDE));
+		pizzas.put("SAV", new Pizza("SAV", "La savoyarde", 13.00, CategoriePizza.VIANDE));
+		pizzas.put("ORI", new Pizza("ORI", "L'orientale", 13.50, CategoriePizza.VIANDE));
+		pizzas.put("IND", new Pizza("IND", "L'indienne", 14.00, CategoriePizza.VIANDE));
+		pizzas.put("SAU", new Pizza("SAU", "Saumonetta", 14.00, CategoriePizza.POISSON));
 	}
 	
 
 	@Override
-	public Pizza[] findAllPizzas() {
-		Pizza[] resultat = new Pizza[100];
-		System.arraycopy(pizzas, 0, resultat, 0, resultat.length);
-		return resultat;
+	public List<Pizza> findAllPizzas() {
+		return new ArrayList<Pizza>(pizzas.values());
 	}
 
 	@Override
 	public void savePizza(Pizza newPizza) throws SavePizzaException {
-		boolean placeTrouve = false;
-		int index = 0;
-		while (!placeTrouve && index < pizzas.length) {
-			placeTrouve = pizzas[index] == null;
-			if(!placeTrouve) {
-				index++;
-			}
-			
+		if(pizzas.containsKey(newPizza.getCode())) {
+			throw new SavePizzaException("Pizza dÈja prÈsente dans la liste des pizzas");
 		}
-
-		if (placeTrouve) {
-			pizzas[index] = newPizza;
-		} else {
-			throw new SavePizzaException();
-		}
-		
+		pizzas.put(newPizza.getCode(), newPizza);
 	}
 
 	@Override
 	public void updatePizza(String codePizza, Pizza updatePizza) throws UpdatePizzaException {
-		ResultatRecherche resultatRecherche = rechercherPizza(codePizza);
-		if (resultatRecherche.pizzaTrouve) {
-			pizzas[resultatRecherche.indexPizzaTrouve] = updatePizza;
-		} else {
-			throw new UpdatePizzaException();
+		if(!pizzas.containsKey(codePizza))
+		{
+			throw new UpdatePizzaException("Code pizza non trouvÈ");
 		}
+		pizzas.put(codePizza, updatePizza);	
+		
 	}
 
 	@Override
 	public void deletePizza(String codePizza) throws DeletePizzaException {
-		ResultatRecherche resultatRecherche = rechercherPizza(codePizza);
-		if (resultatRecherche.pizzaTrouve) {
-			pizzas[resultatRecherche.indexPizzaTrouve] = null;
-		} else {
-			throw new DeletePizzaException();
+		if(!pizzas.containsKey(codePizza))
+		{
+			throw new DeletePizzaException("Code pizza non trouvÈ");
 		}
-		
+		pizzas.remove(codePizza);
 	}
 	
-	private ResultatRecherche rechercherPizza(String codePizza) {
-		boolean pizzaTrouve = false;
-		int indexPizzaTrouve = 0;
-		while (!pizzaTrouve && indexPizzaTrouve < pizzas.length) {
-			if (pizzas[indexPizzaTrouve] != null) {
-				pizzaTrouve = codePizza.equals(pizzas[indexPizzaTrouve].getCode());
-			}
-			if (!pizzaTrouve) {
-				indexPizzaTrouve++;
-			}
-
-		}
-		ResultatRecherche resultat = new ResultatRecherche();
-		resultat.pizzaTrouve = pizzaTrouve;
-		resultat.indexPizzaTrouve = indexPizzaTrouve;
-		return resultat;
-	}
+	
 
 
 }

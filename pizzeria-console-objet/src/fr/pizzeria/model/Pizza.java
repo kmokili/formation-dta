@@ -6,7 +6,9 @@ public class Pizza {
 	private String code;
 	private String nom;
 	private double prix;
+	private CategoriePizza categorie;
 	public static int nbPizzas;
+	
 
 	public Pizza() {
 		// this("jjj","hhhh",12.0);
@@ -19,6 +21,14 @@ public class Pizza {
 		this.code = code;
 		this.nom = nom;
 		this.prix = prix;
+	}
+	
+	public Pizza(String code, String nom, double prix, CategoriePizza categorie) {
+		this();
+		this.code = code;
+		this.nom = nom;
+		this.prix = prix;
+		this.categorie = categorie;
 	}
 
 	public int getId() {
@@ -51,6 +61,19 @@ public class Pizza {
 
 	public void setPrix(double prix) {
 		this.prix = prix;
+	}
+
+	public CategoriePizza getCategorie() {
+		return categorie;
+	}
+
+	public void setCategorie(CategoriePizza categorie) {
+		this.categorie = categorie;
+	}
+
+	@Override
+	public String toString() {
+		return this.getCode() + " -> " + this.getNom() + " (" + this.getPrix() + ") " + this.getCategorie().getLibelle();
 	}
 
 }

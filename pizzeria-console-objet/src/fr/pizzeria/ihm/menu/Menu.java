@@ -1,6 +1,9 @@
 package fr.pizzeria.ihm.menu;
 
+import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Scanner;
+import java.util.TreeMap;
 
 import fr.pizzeria.dao.IPizzaDao;
 import fr.pizzeria.ihm.menu.option.AbstractOptionMenu;
@@ -13,7 +16,7 @@ import fr.pizzeria.ihm.menu.option.SupprimerPizzaOptionMenu;
 public class Menu {
 
 	private static final String MENU_TITRE_LIBELLE = "Application Pizzeria Console";
-	private AbstractOptionMenu[] options;
+	private Map<Integer, AbstractOptionMenu> options = new TreeMap<Integer, AbstractOptionMenu>();
 	private Scanner sc;
 
 	public Menu(Scanner sc, IPizzaDao pizzaDao) {
@@ -23,13 +26,11 @@ public class Menu {
 	}
 
 	private void initialiserOptions(Scanner scanner, IPizzaDao pizzaDao) {
-		options = new AbstractOptionMenu[] { 
-				new ListerPizzaOptionMenu(pizzaDao),
-				new AjouterNouvellePizzaOptionMenu(scanner, pizzaDao),
-				new MettreAJourPizzaOptionMenu(scanner, pizzaDao),
-				new SupprimerPizzaOptionMenu(scanner, pizzaDao),
-				new QuitterOptionMenu()
-		};
+		options.put(1, new ListerPizzaOptionMenu(pizzaDao));
+		options.put(2, new AjouterNouvellePizzaOptionMenu(scanner, pizzaDao));
+		options.put(3, new MettreAJourPizzaOptionMenu(scanner, pizzaDao));
+		options.put(4, new SupprimerPizzaOptionMenu(scanner, pizzaDao));
+		options.put(99, new QuitterOptionMenu());			
 	}
 
 	public void afficher() {
@@ -37,13 +38,13 @@ public class Menu {
 		while (continuer) {
 			System.out.println("**** " + MENU_TITRE_LIBELLE + " ****");
 
-			for (int i = 0; i < options.length; i++) {
-				AbstractOptionMenu opt = options[i];
-				System.out.println(i + ". " + opt.getLibelle());
+			for (Entry<Integer, AbstractOptionMenu> abstractOptionEntry : options.entrySet())
+			{
+				System.out.println(abstractOptionEntry.getKey() + ". " + abstractOptionEntry.getValue().getLibelle());
 			}
 			int saisie = sc.nextInt();
-			continuer = options[saisie].execute();
-		}
+			continuer = options.get(saisie).execute();
+		} // while
 	}
 
 }

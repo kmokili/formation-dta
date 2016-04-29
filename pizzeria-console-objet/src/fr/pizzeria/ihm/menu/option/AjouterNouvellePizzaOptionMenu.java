@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 import fr.pizzeria.dao.IPizzaDao;
 import fr.pizzeria.exception.SavePizzaException;
+import fr.pizzeria.model.CategoriePizza;
 import fr.pizzeria.model.Pizza;
 
 public class AjouterNouvellePizzaOptionMenu extends AbstractOptionMenu {
@@ -26,6 +27,18 @@ public class AjouterNouvellePizzaOptionMenu extends AbstractOptionMenu {
 		newPizza.setPrix(sc.nextDouble());
 
 		try {
+			
+			System.out.println("Veuillez saisir la catégorie");
+			
+			CategoriePizza[] categoriesPizzas = CategoriePizza.values();
+			for(CategoriePizza cat : categoriesPizzas)
+			{
+				 System.out.println(cat.ordinal() + "->" + cat.getLibelle());
+			}
+			 
+			int saisieCategorie = sc.nextInt();
+			newPizza.setCategorie(categoriesPizzas[saisieCategorie]);
+			 
 			pizzaDao.savePizza(newPizza);
 			System.out.println("Nouvelle pizza créée");
 		} catch (SavePizzaException spe) {

@@ -4,11 +4,12 @@ import java.util.Scanner;
 
 import fr.pizzeria.dao.IPizzaDao;
 import fr.pizzeria.exception.UpdatePizzaException;
+import fr.pizzeria.model.CategoriePizza;
 import fr.pizzeria.model.Pizza;
 
 public class MettreAJourPizzaOptionMenu extends AbstractOptionMenu {
 
-	private static final String MAJ_PIZZA_LIBELLE_MENU = "Mettre Ã  jour une Pizza";
+	private static final String MAJ_PIZZA_LIBELLE_MENU = "Mettre à jour une Pizza";
 
 	public MettreAJourPizzaOptionMenu(Scanner scanner, IPizzaDao pizzaDao) {
 		super(MAJ_PIZZA_LIBELLE_MENU, pizzaDao, scanner);
@@ -32,6 +33,19 @@ public class MettreAJourPizzaOptionMenu extends AbstractOptionMenu {
 
 
 		try {
+			
+			System.out.println("Veuillez saisir la catégorie");
+			
+			CategoriePizza[] categoriesPizzas = CategoriePizza.values();
+			for(CategoriePizza cat : categoriesPizzas)
+			{
+				 System.out.println(cat.ordinal() + "->" + cat.getLibelle());
+			}
+			 
+			int saisieCategorie = sc.nextInt();
+			updatePizza.setCategorie(categoriesPizzas[saisieCategorie]);
+			
+			
 			pizzaDao.updatePizza(codePizza, updatePizza);
 			System.out.println("Pizza mise à jour");
 		} catch (UpdatePizzaException upe) {
