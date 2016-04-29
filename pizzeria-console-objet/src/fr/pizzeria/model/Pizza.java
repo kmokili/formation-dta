@@ -3,16 +3,19 @@ package fr.pizzeria.model;
 public class Pizza {
 
 	private int id;
+	@ToString
 	private String code;
+	@ToString
 	private String nom;
+	@ToString
 	private double prix;
+	@ToString
 	private CategoriePizza categorie;
 	public static int nbPizzas;
 	
 
 	public Pizza() {
-		// this("jjj","hhhh",12.0);
-		// super();
+		
 
 	}
 
