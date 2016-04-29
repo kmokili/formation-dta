@@ -3,6 +3,7 @@ package fr.pizzeria.ihm.menu.option;
 import java.util.Scanner;
 
 import fr.pizzeria.dao.IPizzaDao;
+import fr.pizzeria.exception.DeletePizzaException;
 
 public abstract class AbstractOptionMenu {
 	private String libelle;
@@ -24,7 +25,7 @@ public abstract class AbstractOptionMenu {
 		this.sc = sc;
 	}
 
-	public abstract boolean execute();
+	public abstract boolean execute() ;
 
 	public String getLibelle() {
 		return libelle;

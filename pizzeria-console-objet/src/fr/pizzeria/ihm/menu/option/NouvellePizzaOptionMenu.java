@@ -26,14 +26,14 @@ public class NouvellePizzaOptionMenu extends AbstractOptionMenu {
 		newPizza.setNom(sc.next());
 		System.out.println("Veuillez saisir le prix");
 		newPizza.setPrix(sc.nextDouble());
-		
-		boolean resultat = pizzaDao.savePizza(newPizza);
-		
-		if (resultat) {
-			System.out.println("Nouvelle pizza créée");
-		} else {
-			System.err.println("Echec création de pizza");
-		}
+//		
+//		boolean resultat = pizzaDao.savePizza(newPizza);
+//		
+//		if (resultat) {
+//			System.out.println("Nouvelle pizza créée");
+//		} else {
+//			System.err.println("Echec création de pizza");
+//		}
 		
 		return true;
 	}

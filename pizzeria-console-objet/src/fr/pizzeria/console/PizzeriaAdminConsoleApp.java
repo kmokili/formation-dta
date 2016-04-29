@@ -98,9 +98,9 @@ public class PizzeriaAdminConsoleApp {
 	}
 
 	private static void MettreAJourUnePizza(Scanner sc, Pizza[]pizzas) {
-		System.out.println("Mise à jour d’une pizza");
+		System.out.println("Mise à jour d'une pizza");
 		afficherListePizzas(pizzas);
-		System.out.println("Veuillez choisir la pizza à modifier. (99 pour abandonner)");
+		System.out.println("Veuillez choisir la pizza � modifier. (99 pour abandonner)");
 		String codePizza = sc.next();
 		ResultatRecherche resultatRecherche = rechercherPizza(pizzas, codePizza);
 		if (resultatRecherche.pizzaTrouve) {
@@ -113,7 +113,7 @@ public class PizzeriaAdminConsoleApp {
 	private static void supprimerPizza(Scanner sc, Pizza[]pizzas) {
 		System.out.println("Suppression d’une pizza");
 		afficherListePizzas(pizzas);
-		System.out.println("Veuillez choisir la pizza à supprimer. (99 pour abandonner)");
+		System.out.println("Veuillez choisir la pizza � supprimer. (99 pour abandonner)");
 		String codePizzaSuppr = sc.next();
 		ResultatRecherche resultatRecherche = rechercherPizza(pizzas, codePizzaSuppr);
 		if (resultatRecherche.pizzaTrouve) {

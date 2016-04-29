@@ -1,10 +1,16 @@
 package fr.pizzeria.dao;
 
-import java.util.Arrays;
-
+import fr.pizzeria.exception.DeletePizzaException;
+import fr.pizzeria.exception.SavePizzaException;
+import fr.pizzeria.exception.UpdatePizzaException;
 import fr.pizzeria.model.Pizza;
 
 public class PizzaDaoImpl implements IPizzaDao {
+	
+	private static class ResultatRecherche {
+		boolean pizzaTrouve;
+		int indexPizzaTrouve;
+	}
 	
 	private Pizza[] pizzas = new Pizza[100];
 
@@ -28,34 +34,63 @@ public class PizzaDaoImpl implements IPizzaDao {
 	}
 
 	@Override
-	public boolean savePizza(Pizza newPizza) {
-		System.out.println("Ajout d'une nouvelle pizza");
+	public void savePizza(Pizza newPizza) throws SavePizzaException {
 		boolean placeTrouve = false;
 		int index = 0;
 		while (!placeTrouve && index < pizzas.length) {
 			placeTrouve = pizzas[index] == null;
-			index++;
+			if(!placeTrouve) {
+				index++;
+			}
+			
 		}
 
 		if (placeTrouve) {
 			pizzas[index] = newPizza;
-			Pizza.nbPizzas++;
 		} else {
-			System.err.println("Plus de place pour une nouvelle pizza");
+			throw new SavePizzaException();
 		}
-		return placeTrouve;
-	}
-
-	@Override
-	public boolean updatePizza(String codePizza, Pizza updatePizza) {
 		
-		return false;
 	}
 
 	@Override
-	public boolean deletePizza(String codePizza) {
-		// TODO Auto-generated method stub
-		return false;
+	public void updatePizza(String codePizza, Pizza updatePizza) throws UpdatePizzaException {
+		ResultatRecherche resultatRecherche = rechercherPizza(codePizza);
+		if (resultatRecherche.pizzaTrouve) {
+			pizzas[resultatRecherche.indexPizzaTrouve] = updatePizza;
+		} else {
+			throw new UpdatePizzaException();
+		}
 	}
+
+	@Override
+	public void deletePizza(String codePizza) throws DeletePizzaException {
+		ResultatRecherche resultatRecherche = rechercherPizza(codePizza);
+		if (resultatRecherche.pizzaTrouve) {
+			pizzas[resultatRecherche.indexPizzaTrouve] = null;
+		} else {
+			throw new DeletePizzaException();
+		}
+		
+	}
+	
+	private ResultatRecherche rechercherPizza(String codePizza) {
+		boolean pizzaTrouve = false;
+		int indexPizzaTrouve = 0;
+		while (!pizzaTrouve && indexPizzaTrouve < pizzas.length) {
+			if (pizzas[indexPizzaTrouve] != null) {
+				pizzaTrouve = codePizza.equals(pizzas[indexPizzaTrouve].getCode());
+			}
+			if (!pizzaTrouve) {
+				indexPizzaTrouve++;
+			}
+
+		}
+		ResultatRecherche resultat = new ResultatRecherche();
+		resultat.pizzaTrouve = pizzaTrouve;
+		resultat.indexPizzaTrouve = indexPizzaTrouve;
+		return resultat;
+	}
+
 
 }
