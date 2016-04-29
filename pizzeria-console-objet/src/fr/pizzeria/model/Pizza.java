@@ -92,7 +92,7 @@ public class Pizza {
 						value += uppercase ? valeurDuChamp.toString().toUpperCase() : valeurDuChamp + " ";
 					}
 				} catch (IllegalArgumentException | IllegalAccessException e) {
-					
+					e.printStackTrace();
 				}
 			} // if	
 		 } // for		
