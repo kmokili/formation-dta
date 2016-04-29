@@ -1,12 +1,14 @@
 package fr.pizzeria.model;
 
-public class Pizza implements Comparable<Pizza>{
+public class Pizza {
 
 	private int id;
 	private String code;
 	private String nom;
 	private double prix;
+	private CategoriePizza categorie;
 	public static int nbPizzas;
+	
 
 	public Pizza() {
 		// this("jjj","hhhh",12.0);
@@ -19,6 +21,14 @@ public class Pizza implements Comparable<Pizza>{
 		this.code = code;
 		this.nom = nom;
 		this.prix = prix;
+	}
+	
+	public Pizza(String code, String nom, double prix, CategoriePizza categorie) {
+		this();
+		this.code = code;
+		this.nom = nom;
+		this.prix = prix;
+		this.categorie = categorie;
 	}
 
 	public int getId() {
@@ -53,11 +63,18 @@ public class Pizza implements Comparable<Pizza>{
 		this.prix = prix;
 	}
 
+	public CategoriePizza getCategorie() {
+		return categorie;
+	}
+
+	public void setCategorie(CategoriePizza categorie) {
+		this.categorie = categorie;
+	}
 
 	@Override
-	public int compareTo(Pizza o) {
-		// TODO Auto-generated method stub
-		return 0;
+	public String toString() {
+		return this.getCode() + " -> " + this.getNom() + " (" + this.getPrix() + ") " + this.getCategorie().getLibelle();
+
 	}
 
 }
