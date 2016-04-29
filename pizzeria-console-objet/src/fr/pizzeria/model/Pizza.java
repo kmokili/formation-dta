@@ -1,12 +1,12 @@
 package fr.pizzeria.model;
 
+import java.lang.reflect.Field;
+
 public class Pizza {
 
 	private int id;
-	@ToString
-	private String code;
-	@ToString
-	private String nom;
+	@ToString private String code;
+	@ToString(uppercase = true) private String nom;
 	@ToString
 	private double prix;
 	@ToString
@@ -76,7 +76,27 @@ public class Pizza {
 
 	@Override
 	public String toString() {
-		return this.getCode() + " -> " + this.getNom() + " (" + this.getPrix() + ") " + this.getCategorie().getLibelle();
+		String value = "";
+		Field[] champs = Pizza.class.getDeclaredFields();
+		
+		for (Field f : champs)
+		{
+			ToString annotation = f.getAnnotation(ToString.class);
+			if (annotation != null)
+			{
+				try 
+				{
+					{
+						boolean uppercase = annotation.uppercase();
+						Object valeurDuChamp = f.get(this);
+						value += uppercase ? valeurDuChamp.toString().toUpperCase() : valeurDuChamp + " ";
+					}
+				} catch (IllegalArgumentException | IllegalAccessException e) {
+					
+				}
+			} // if	
+		 } // for		
+		return value;
 
 	}
 
