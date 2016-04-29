@@ -12,6 +12,9 @@ import fr.pizzeria.model.Pizza;
 
 public class PizzaDaoImpl implements IPizzaDao {
 	
+	/*
+	 * Pratique pour retrouver facilement et rapidement une pizza
+	 */
 	private Map<String, Pizza> pizzas = new HashMap<String, Pizza>();
 
 	public PizzaDaoImpl() {
