@@ -3,6 +3,7 @@ package fr.pizzeria.ihm.menu;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Scanner;
+import java.util.TreeMap;
 
 import fr.pizzeria.dao.IPizzaDao;
 import fr.pizzeria.ihm.menu.option.AbstractOptionMenu;
@@ -15,7 +16,7 @@ import fr.pizzeria.ihm.menu.option.SupprimerPizzaOptionMenu;
 public class Menu {
 
 	private static final String MENU_TITRE_LIBELLE = "Application Pizzeria Console";
-	private Map<Integer, AbstractOptionMenu> options;
+	private Map<Integer, AbstractOptionMenu> options = new TreeMap<Integer, AbstractOptionMenu>();
 	private Scanner sc;
 
 	public Menu(Scanner sc, IPizzaDao pizzaDao) {
@@ -39,8 +40,10 @@ public class Menu {
 
 			for (Entry<Integer, AbstractOptionMenu> abstractOptionEntry : options.entrySet())
 			{
-				System.out.println(abstractOptionEntry.getKey() + ". " + abstractOptionEntry.getValue());
+				System.out.println(abstractOptionEntry.getKey() + ". " + abstractOptionEntry.getValue().getLibelle());
 			}
+			int saisie = sc.nextInt();
+			continuer = options.get(saisie).execute();
 		} // while
 	}
 
