@@ -32,7 +32,7 @@ public class AjouterNouvellePizzaOptionMenu extends AbstractOptionMenu {
 		try {
 			newPizza.setPrix(sc.nextDouble());
 			
-			System.out.println("Veuillez saisir la catÃ©gorie");
+			System.out.println("Veuillez saisir la catégorie");
 			
 			CategoriePizza[] categoriePizzas = CategoriePizza.values();
 
@@ -45,12 +45,12 @@ public class AjouterNouvellePizzaOptionMenu extends AbstractOptionMenu {
 			
 			
 			pizzaDao.savePizza(newPizza);
-			System.out.println("Nouvelle pizza crÃ©Ã©e");
+			System.out.println("Nouvelle pizza créée");
 
 		} catch (InputMismatchException e) {
 			System.err.println("Input " + sc.next() + " n'est pas un nombre");
 		} catch (DaoException e) {
-			System.err.println("Echec crÃ©ation de pizza");
+			System.err.println("Echec création de pizza");
 		}
 		
 		
