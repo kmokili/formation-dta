@@ -22,7 +22,8 @@ public class PizzaAdminApp {
 		
 
 
-		
+		// hack pour faire planter si la librairie commons-lang est absente
+		new Pizza().equals(new Pizza());
 		
 		try(Scanner sc = new Scanner(System.in)) {
 			IPizzaDao dao = new PizzaDaoFichierImpl();

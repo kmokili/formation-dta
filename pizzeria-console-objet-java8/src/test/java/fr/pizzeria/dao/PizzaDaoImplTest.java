@@ -80,7 +80,7 @@ public class PizzaDaoImplTest {
 	
 	@Test (expected = SavePizzaException.class)
 	public void testSavePizzaCodeExistant() throws DaoException {
-		Pizza newPizza = new Pizza("CODE_INEXISTANT", "Nouveau nom", 15, CategoriePizza.VIANDE);
+		Pizza newPizza = new Pizza("PEP", "Nouveau nom", 15, CategoriePizza.VIANDE);
 		pizzaDaoImpl.savePizza(newPizza);
 	}
 	

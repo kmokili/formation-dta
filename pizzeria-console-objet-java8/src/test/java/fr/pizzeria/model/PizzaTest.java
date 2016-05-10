@@ -26,9 +26,6 @@ public class PizzaTest {
 	public void tearDown() throws Exception {
 	}
 
-	@Test
-	public void testToString() {
-		fail("Not yet implemented");
-	}
+	
 
 }
