@@ -25,23 +25,23 @@ public class PizzaAdminApp {
 		ResourceBundle bundle = ResourceBundle.getBundle("application");
 		String confString = bundle.getString("dao.impl");
 		Integer daoImplConf = Integer.valueOf(confString);
-		IPizzaDao dao = null;
+		
 		switch (daoImplConf) {
 		case 0:
-			dao = new PizzaDaoImpl();
+			lancerApplication(new PizzaDaoImpl());
 			break;
 		case 1:
-			dao = new PizzaDaoFichierImpl();
+			lancerApplication(new PizzaDaoFichierImpl());
 			break;
 		default:
 			System.err.println("Aucune configuration Dao trouvée. Le fichier application.properties est-il vraiment configuré ?");
 			break;
 		}
+	}
 
-
-		// hack pour faire planter si la librairie commons-lang est absente
-		new Pizza().equals(new Pizza());
+	
 		
+	private static void lancerApplication(IPizzaDao dao){
 		try(Scanner sc = new Scanner(System.in)) {
 			Menu menu = new Menu(sc,dao);
 			menu.afficher();
