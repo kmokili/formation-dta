@@ -8,6 +8,12 @@
   <modelVersion>4.0.0</modelVersion>
   <artifactId>pizzeria-console-objet-java8</artifactId>
   <build>
+    <resources>
+      <resource>
+        <filtering>true</filtering>
+        <directory>src/main/resources</directory>
+      </resource>
+    </resources>
     <pluginManagement>
       <plugins>
         <plugin>
@@ -42,6 +48,20 @@
       </plugin>
     </plugins>
   </build>
+  <profiles>
+    <profile>
+      <id>dev</id>
+      <properties>
+        <dao.impl>0</dao.impl>
+      </properties>
+    </profile>
+    <profile>
+      <id>prod</id>
+      <properties>
+        <dao.impl>1</dao.impl>
+      </properties>
+    </profile>
+  </profiles>
   <dependencies>
     <dependency>
       <groupId>junit</groupId>
@@ -62,5 +82,8 @@
       <scope>test</scope>
     </dependency>
   </dependencies>
+  <properties>
+    <dao.impl>0</dao.impl>
+  </properties>
 </project>
 

@@ -1,26 +1,28 @@
 package fr.pizzeria.console;
 
 import java.io.IOException;
-import java.nio.charset.Charset;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.Collections;
-import java.util.List;
+
 import java.util.ResourceBundle;
 import java.util.Scanner;
-import java.util.stream.Collectors;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import fr.pizzeria.dao.IPizzaDao;
 import fr.pizzeria.dao.PizzaDaoFichierImpl;
 import fr.pizzeria.dao.PizzaDaoImpl;
-import fr.pizzeria.ihm.menu.Menu;import fr.pizzeria.model.CategoriePizza;
-import fr.pizzeria.model.Pizza;
+import fr.pizzeria.ihm.menu.Menu;
 
 
 public class PizzaAdminApp {
+	
+	private static final Logger LOG = Logger.getLogger("PizzaAdminApp");
 
+	private PizzaAdminApp() {
+		
+	}
+	
 	public static void main(String[] args) throws IOException {
+		LOG.log(Level.INFO, "Démarrage de l'application");
 		
 		ResourceBundle bundle = ResourceBundle.getBundle("application");
 		String confString = bundle.getString("dao.impl");
