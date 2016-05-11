@@ -11,7 +11,7 @@ import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 public class Pizza {
-9
+
 	private int id;
 	@ToString private String code;
 	@ToString(uppercase = true) private String nom;
