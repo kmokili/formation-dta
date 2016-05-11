@@ -11,9 +11,17 @@
 	  <relativePath>../</relativePath>
   	</parent>	
 	
-	
+	<properties>
+		<dao.impl>0</dao.impl>
+	</properties>
 	
 	<build>
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>true</filtering>
+			</resource>
+		</resources>
 		<pluginManagement>
 			<plugins>
 				<plugin>
@@ -76,4 +84,22 @@
 			<artifactId>commons-lang3</artifactId>
 		</dependency>		
 	</dependencies>
+	
+	<profiles>
+		<profile>
+			<id>dev</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<properties>
+				<dao.impl>0</dao.impl>
+			</properties>
+		</profile>
+		<profile>
+			<id>prod</id>
+			<properties>
+				<dao.impl>1</dao.impl>
+			</properties>
+		</profile>
+	</profiles>
 </project>
