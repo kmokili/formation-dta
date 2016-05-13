@@ -20,7 +20,7 @@ public class ListerPizzaOptionMenu extends AbstractOptionMenu {
 
 		try {
 			pizzaDao.findAllPizzas().stream()
-				.sorted(Comparator.comparing(Pizza::getCode))
+				.sorted(Comparator.comparing(Pizza::getId))
 				.forEach(System.out::println);
 		} catch (DaoException e) {
 			// TODO Auto-generated catch block
