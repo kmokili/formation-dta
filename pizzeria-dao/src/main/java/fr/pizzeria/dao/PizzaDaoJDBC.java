@@ -98,12 +98,6 @@ public class PizzaDaoJDBC implements IPizzaDao {
 			e.printStackTrace();
 		}
 		
-		
-		if(pizzas.containsKey(newPizza.getCode())) {
-			throw new SavePizzaException("code pizza déjà présent");
-		}
-		pizzas.put(newPizza.getCode(), newPizza);
-		
 	}
 
 	@Override
