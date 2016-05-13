@@ -97,10 +97,23 @@ public class PizzaDaoJDBC implements IPizzaDao {
 
 	@Override
 	public void updatePizza(String codePizza, Pizza updatePizza) throws DaoException {
-		if(!pizzas.containsKey(codePizza)) {
-			throw new UpdatePizzaException("code pizza non trouvé");
+
+		try (
+				Connection connection = connexion();
+				PreparedStatement statement = connection.prepareStatement(
+						"UPDATE	PIZZA SET prix=20.0 WHERE nom=?");	
+			)
+		{
+//			statement.setInt(1,12);
+			statement.setString(1, "Regina");
+			statement.executeUpdate();
+			connection.close();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			System.err.println("Pas de statement créé");
+			e.printStackTrace();
 		}
-		pizzas.put(codePizza, updatePizza);
 	}
 
 	@Override
