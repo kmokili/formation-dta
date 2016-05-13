@@ -3,6 +3,7 @@ package fr.pizzeria.dao;
 import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -21,35 +22,31 @@ import fr.pizzeria.model.Pizza;
 
 public class PizzaDaoJDBC implements IPizzaDao {
 	
-//	private static final String DRIVER = "com.mysql.jdbc.Driver";
-	private Map<String, Pizza> pizzas = new HashMap<String, Pizza>();
 
-	public PizzaDaoJDBC() {
-		pizzas.put("PEP", new Pizza("PEP", "Pépéroni", 12.50, CategoriePizza.VIANDE));
-		pizzas.put("MAR", new Pizza("MAR", "Margherita", 14.00,  CategoriePizza.SANS_VIANDE));
-		pizzas.put("REI", new Pizza("REI", "La Reine", 11.50, CategoriePizza.VIANDE));
-		pizzas.put("FRO", new Pizza("FRO", "La 4 fromages", 12.00,  CategoriePizza.SANS_VIANDE));
-		pizzas.put("CAN", new Pizza("CAN", "La cannibale", 12.50, CategoriePizza.VIANDE));
-		pizzas.put("SAV", new Pizza("SAV", "La savoyarde", 13.00, CategoriePizza.VIANDE));
-		pizzas.put("ORI", new Pizza("ORI", "L'orientale", 13.50, CategoriePizza.VIANDE));
-		pizzas.put("IND", new Pizza("IND", "L'indienne", 14.00, CategoriePizza.VIANDE));
-		pizzas.put("SAU", new Pizza("SAU", "La Saumonéta", 14.00, CategoriePizza.POISSON));
-	}
+	private Map<String, Pizza> pizzas = new HashMap<String, Pizza>();
 	
+	private String url;
+	private String user;
+	private String pass;
+	
+	public PizzaDaoJDBC(String driver, String url2, String user2, String pass2)  throws DaoException{
+		try {
+			Class.forName(driver);
+			this.url = url2;
+			this.user = user2;
+			this.pass = pass2;
+		} catch (ClassNotFoundException e) {
+			throw new DaoException(e);
+		}
+	}
+
+		
 	
 	private Connection connexion() throws SQLException {
-		return DriverManager.getConnection("jdbc:mysql://localhost:3306/pizzeria","root","");
+		return DriverManager.getConnection(url,user,pass);
 	}
 	
 	
-	private void deconnexion(Connection conn) {
-			try {
-				conn.close();
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-	}
 	
 	
 	@Override
@@ -82,14 +79,12 @@ public class PizzaDaoJDBC implements IPizzaDao {
 		
 		try (
 				Connection connection = connexion();
-				Statement statement = connection.createStatement();	
+				PreparedStatement statement = connection.prepareStatement("INSERT INTO PIZZA(nom, prix)"
+					+ "VALUES('Regina', 12.0)");	
 			)
 		{
 			
-			int nbPizzaInsere = statement.executeUpdate("INSERT INTO PIZZA(nom, prix)"
-					+ "VALUES('Regina', 12.0)");
-			String message = nbPizzaInsere < 2 ? nbPizzaInsere + " pizza insérée" : nbPizzaInsere + " pizza insérées";
-			System.out.println(message);
+			statement.executeUpdate();
 			connection.close();
 			
 		} catch (SQLException e) {
