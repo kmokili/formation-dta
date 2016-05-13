@@ -61,12 +61,16 @@ public class PizzaDaoJDBC implements IPizzaDao {
 			while(resultats.next()) {
 				Pizza pizza = new Pizza();
 				pizza.setId(resultats.getInt("id"));
-				pizza.setNom(resultats.getString("nom")); ;
+				pizza.setCode(resultats.getString("code"));
+				pizza.setNom(resultats.getString("nom")); 
 				pizza.setPrix(resultats.getDouble("prix"));
+				pizza.setCategorie(CategoriePizza.valueOf(resultats.getString("categorie")));
 				System.out.println("[id = " + pizza.getId() 
 					+ " code = " + pizza.getCode()
 					+ " - nom = " + pizza.getNom() 
-					+ " - prix = " + pizza.getPrix() + "]");
+					+ " - prix = " + pizza.getPrix() 
+					+ " - categorie = " + pizza.getCategorie().getLibelle()
+					+ "]");
 				pizzas.add(pizza);
 			}
 			connection.close();
@@ -84,10 +88,16 @@ public class PizzaDaoJDBC implements IPizzaDao {
 		
 		try (
 				Connection connection = connexion();
-				PreparedStatement statement = connection.prepareStatement("INSERT INTO PIZZA(nom, prix)"
-					+ "VALUES('Regina', 12.0)");	
+				PreparedStatement statement = connection.prepareStatement(
+						"INSERT INTO PIZZA(code, nom, prix, categorie) VALUES(?, ?, ?, ?)");	
 			)
 		{
+			statement.setString(1, newPizza.getCode());
+			statement.setString(2, newPizza.getNom());
+			statement.setDouble(3, newPizza.getPrix());
+			statement.setString(4, newPizza.getCategorie().name());
+			
+			CategoriePizza.valueOf("VIANDE");
 			
 			statement.executeUpdate();
 			connection.close();
@@ -124,10 +134,21 @@ public class PizzaDaoJDBC implements IPizzaDao {
 
 	@Override
 	public void deletePizza(String codePizza) throws DaoException {
-		if(!pizzas.containsKey(codePizza)) {
-			throw new DeletePizzaException("code pizza non trouvé");
+		try (
+				Connection connection = connexion();
+				PreparedStatement statement = connection.prepareStatement(
+						"DELETE FROM `pizza` WHERE code=?");	
+			)
+		{
+			statement.setString(1, codePizza);
+			statement.executeUpdate();
+			connection.close();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			System.err.println("Pas de statement créé");
+			e.printStackTrace();
 		}
-		pizzas.remove(codePizza);
 	}
 
 }
