@@ -53,7 +53,9 @@ public class PizzaDaoJDBC implements IPizzaDao {
 	public List<Pizza> findAllPizzas() {
 		List<Pizza> pizzas = new ArrayList<>();
 		
-		try (Connection connection = connexion();Statement statement = connection.createStatement();){
+		try (Connection connection = connexion();
+			Statement statement = connection.createStatement();
+			){
 			
 			ResultSet resultats = statement.executeQuery("SELECT * FROM	PIZZA");
 			while(resultats.next()) {
@@ -61,7 +63,10 @@ public class PizzaDaoJDBC implements IPizzaDao {
 				pizza.setId(resultats.getInt("id"));
 				pizza.setNom(resultats.getString("nom")); ;
 				pizza.setPrix(resultats.getDouble("prix"));
-				System.out.println("[id = " + pizza.getId() + " - name = " + pizza.getNom() + " - price = " + pizza.getPrix() + "]");
+				System.out.println("[id = " + pizza.getId() 
+					+ " code = " + pizza.getCode()
+					+ " - nom = " + pizza.getNom() 
+					+ " - prix = " + pizza.getPrix() + "]");
 				pizzas.add(pizza);
 			}
 			connection.close();
@@ -101,11 +106,12 @@ public class PizzaDaoJDBC implements IPizzaDao {
 		try (
 				Connection connection = connexion();
 				PreparedStatement statement = connection.prepareStatement(
-						"UPDATE	PIZZA SET prix=20.0 WHERE nom=?");	
+						"UPDATE	PIZZA SET prix=? WHERE code=? and nom=?");	
 			)
 		{
-//			statement.setInt(1,12);
-			statement.setString(1, "Regina");
+			statement.setDouble(1, updatePizza.getPrix());
+			statement.setString(2, codePizza);
+			statement.setString(3, updatePizza.getNom());
 			statement.executeUpdate();
 			connection.close();
 			
