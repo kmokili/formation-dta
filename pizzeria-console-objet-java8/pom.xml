@@ -82,6 +82,16 @@
 		<dependency>
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-lang3</artifactId>
+		</dependency>
+		<dependency>
+		    <groupId>org.hibernate.javax.persistence</groupId>
+		    <artifactId>hibernate-jpa-2.1-api</artifactId>
+		    <version>1.0.0.Final</version>
+		</dependency>
+		<dependency>
+		    <groupId>org.hibernate</groupId>
+		    <artifactId>hibernate-entitymanager</artifactId>
+		    <version>5.1.0.Final</version>
 		</dependency>		
 	</dependencies>
 	
@@ -92,13 +102,17 @@
 				<activeByDefault>true</activeByDefault>
 			</activation>
 			<properties>
-				<dao.impl>0</dao.impl>
+				<dao.impl>3</dao.impl>
+				<jdbc.driver>com.mysql.jdbc.Driver</jdbc.driver>
+				<jdbc.url>jdbc:mysql://localhost:3306/pizzeria</jdbc.url>
+				<jdbc.user>root</jdbc.user>
+				<jdbc.pass></jdbc.pass>
 			</properties>
 		</profile>
 		<profile>
 			<id>prod</id>
 			<properties>
-				<dao.impl>1</dao.impl>
+				<dao.impl>3</dao.impl>
 			</properties>
 		</profile>
 	</profiles>

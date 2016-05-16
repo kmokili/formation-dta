@@ -59,4 +59,10 @@ public class PizzaDaoImpl implements IPizzaDao {
 		pizzas.remove(codePizza);
 	}
 
+	@Override
+	public void saveAllPizzas(List<Pizza> listPizzas, int nb) throws DaoException {
+		// TODO Auto-generated method stub
+		
+	}
+
 }
