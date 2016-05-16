@@ -22,6 +22,8 @@ import fr.pizzeria.ihm.menu.Menu;
 public class PizzaAdminApp {
 	
 	private static final Logger LOG = Logger.getLogger("PizzaAdminApp");
+	
+
 
 	private PizzaAdminApp() {
 		
@@ -55,6 +57,7 @@ public class PizzaAdminApp {
 			break;
 		case 3:
 			System.out.println("DAO JPA");
+//			java.util.logging.Logger.getLogger("org.hibernate").setLevel(Level.SEVERE);
 			EntityManagerFactory emf = Persistence.createEntityManagerFactory("pizzeria-console-objet-java8");			
 			lancerApplication(new PizzaDaoJpa(emf));
 			break;

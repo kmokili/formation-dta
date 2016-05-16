@@ -63,7 +63,7 @@ public class PizzaDaoJDBC implements IPizzaDao {
 				pizza.setId(resultats.getInt("id"));
 				pizza.setCode(resultats.getString("code"));
 				pizza.setNom(resultats.getString("nom")); 
-				pizza.setPrix(resultats.getDouble("prix"));
+				pizza.setPrix(resultats.getBigDecimal("prix"));
 				pizza.setCategorie(CategoriePizza.valueOf(resultats.getString("categorie")));
 				System.out.println("[id = " + pizza.getId() 
 					+ " code = " + pizza.getCode()
@@ -94,7 +94,7 @@ public class PizzaDaoJDBC implements IPizzaDao {
 		{
 			statement.setString(1, newPizza.getCode());
 			statement.setString(2, newPizza.getNom());
-			statement.setDouble(3, newPizza.getPrix());
+			statement.setBigDecimal(3, newPizza.getPrix());
 			statement.setString(4, newPizza.getCategorie().name());
 			
 			CategoriePizza.valueOf("VIANDE");
@@ -119,7 +119,7 @@ public class PizzaDaoJDBC implements IPizzaDao {
 						"UPDATE	PIZZA SET prix=? WHERE code=? and nom=?");	
 			)
 		{
-			statement.setDouble(1, updatePizza.getPrix());
+			statement.setBigDecimal(1, updatePizza.getPrix());
 			statement.setString(2, codePizza);
 			statement.setString(3, updatePizza.getNom());
 			statement.executeUpdate();
