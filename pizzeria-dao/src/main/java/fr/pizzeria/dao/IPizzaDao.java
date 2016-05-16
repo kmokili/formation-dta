@@ -12,5 +12,6 @@ public interface IPizzaDao {
 	void savePizza(Pizza newPizza) throws DaoException;
 	void updatePizza(String codePizza, Pizza updatePizza) throws DaoException;
 	void deletePizza(String codePizza) throws DaoException;
+	void saveAllPizzas(List<Pizza> listPizzas, int nb) throws DaoException;
 
 }
