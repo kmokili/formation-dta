@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.EntityTransaction;
 import javax.persistence.TypedQuery;
 
 import fr.pizzeria.exception.DaoException;
@@ -24,13 +25,18 @@ public class PizzaDaoJpa implements IPizzaDao {
 		EntityManager em = emFactory.createEntityManager();
 		TypedQuery<Pizza> query = em.createQuery("select p from Pizza p", Pizza.class);
 		List<Pizza> resultat = query.getResultList();
+		em.close();
 		return resultat;
 	}
 
 	@Override
 	public void savePizza(Pizza newPizza) throws DaoException {
-		// TODO Auto-generated method stub
-
+		EntityManager em = emFactory.createEntityManager();
+		EntityTransaction transaction = em.getTransaction();
+		transaction.begin();
+		em.persist(newPizza);
+		transaction.commit();
+		em.close();
 	}
 
 	@Override
