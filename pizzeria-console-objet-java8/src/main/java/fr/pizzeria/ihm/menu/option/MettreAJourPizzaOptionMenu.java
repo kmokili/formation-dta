@@ -31,7 +31,7 @@ public class MettreAJourPizzaOptionMenu extends AbstractOptionMenu {
 		System.out.println("Veuillez saisir le nom (sans espace)");
 		updatePizza.setNom(sc.next());
 		System.out.println("Veuillez saisir le prix");
-		updatePizza.setPrix(sc.nextDouble());
+		updatePizza.setPrix(sc.nextBigDecimal());
 	
 		try {
 			pizzaDao.updatePizza(codePizza, updatePizza);

@@ -30,7 +30,7 @@ public class AjouterNouvellePizzaOptionMenu extends AbstractOptionMenu {
 		newPizza.setNom(sc.next());
 		System.out.println("Veuillez saisir le prix");
 		try {
-			newPizza.setPrix(sc.nextDouble());
+			newPizza.setPrix(sc.nextBigDecimal());
 			
 			System.out.println("Veuillez saisir la catégorie");
 			
