@@ -7,6 +7,9 @@ import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+
 import fr.pizzeria.dao.IPizzaDao;
 import fr.pizzeria.dao.PizzaDaoFichierImpl;
 import fr.pizzeria.dao.PizzaDaoImpl;
@@ -33,9 +36,11 @@ public class PizzaAdminApp {
 		
 		switch (daoImplConf) {
 		case 0:
+			System.out.println("DAO mémoire");
 			lancerApplication(new PizzaDaoImpl());
 			break;
 		case 1:
+			System.out.println("DAO fichiers");
 			lancerApplication(new PizzaDaoFichierImpl());
 			break;
 		case 2:
@@ -49,7 +54,9 @@ public class PizzaAdminApp {
 			lancerApplication(new PizzaDaoJDBC(driver,url,user,pass));
 			break;
 		case 3:
-			lancerApplication(new PizzaDaoJpa(null));
+			System.out.println("DAO JPA");
+			EntityManagerFactory emf = Persistence.createEntityManagerFactory("pizzeria-console-objet-java8");			
+			lancerApplication(new PizzaDaoJpa(emf));
 			break;
 		default:
 			System.err.println("Aucune configuration Dao trouvée. Le fichier application.properties est-il vraiment configuré ?");

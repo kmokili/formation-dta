@@ -102,7 +102,7 @@
 				<activeByDefault>true</activeByDefault>
 			</activation>
 			<properties>
-				<dao.impl>2</dao.impl>
+				<dao.impl>3</dao.impl>
 				<jdbc.driver>com.mysql.jdbc.Driver</jdbc.driver>
 				<jdbc.url>jdbc:mysql://localhost:3306/pizzeria</jdbc.url>
 				<jdbc.user>root</jdbc.user>
@@ -112,7 +112,7 @@
 		<profile>
 			<id>prod</id>
 			<properties>
-				<dao.impl>2</dao.impl>
+				<dao.impl>3</dao.impl>
 			</properties>
 		</profile>
 	</profiles>
