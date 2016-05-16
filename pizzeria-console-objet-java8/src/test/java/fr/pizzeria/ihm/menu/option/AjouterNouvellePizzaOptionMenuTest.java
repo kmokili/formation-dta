@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
+import java.util.Locale;
 import java.util.Optional;
 import java.util.Scanner;
 import java.util.stream.Collectors;
@@ -48,6 +49,7 @@ public class AjouterNouvellePizzaOptionMenuTest {
 
 	@Before
 	public void setUp() throws Exception {
+		Locale.setDefault(Locale.FRANCE);
 		Scanner scanner = new Scanner(System.in);
 		pizzaDao = new PizzaDaoImpl();
 		optionMenu = new AjouterNouvellePizzaOptionMenu(scanner, pizzaDao);
@@ -59,7 +61,7 @@ public class AjouterNouvellePizzaOptionMenuTest {
 
 	@Test
 	public void testExecute() throws DaoException, IOException {
-		systemInMock.provideLines("NEW", "NewPizza", "12,5", "0");
+		systemInMock.provideLines("NEW", "NewPizza", "12.5", "0");
 		boolean next = optionMenu.execute();
 		assertTrue(next);
 		List<Pizza> allPizzas = pizzaDao.findAllPizzas();
