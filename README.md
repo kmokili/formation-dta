@@ -1,5 +1,5 @@
 # formation-dta
-<a href='http://ns377570.ip-5-196-89.eu:8080/job/Kevin%20Mokili%20-%20Pizzeria-build/'><img src='http://ns377570.ip-5-196-89.eu:8080/job/Kevin%20Mokili%20-%20Pizzeria-build/badge/icon'></a>
+[![Build Status](http://ns377570.ip-5-196-89.eu:8080/job/Kevin%20Mokili%20-%20Pizzeria-build/badge/icon)](http://ns377570.ip-5-196-89.eu:8080/job/Kevin%20Mokili%20-%20Pizzeria-build/)
 Projets réalisés durant la formation DTA
 
 ## pizzeria-console-imperative
