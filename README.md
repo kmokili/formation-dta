@@ -11,3 +11,9 @@ Le code source est placé dans le dossier pizzeria-console-imperative.
 La même application mais en version objet.
 
 Le code source est placé dans le dossier pizzeria-console-objet.
+
+## pizzeria-console-objet-java8
+La même application que la précédente mais avec des nouveautés de Java 8.
+Ce projet est actuellement un projet Maven.
+Il fait partie des modules Maven associés au projet parent qui pilote l'application de la pizzeria.
+
