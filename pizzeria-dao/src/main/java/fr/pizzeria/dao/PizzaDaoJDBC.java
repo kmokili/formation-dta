@@ -73,6 +73,7 @@ public class PizzaDaoJDBC implements IPizzaDao {
 					+ "]");
 				pizzas.add(pizza);
 			}
+			resultats.close();
 			connection.close();
 		} catch (SQLException e) {
 			System.err.println("Pas de statement créé");

@@ -36,10 +36,6 @@ public class MettreAJourPizzaOptionMenu extends AbstractOptionMenu {
 		try {
 			pizzaDao.updatePizza(codePizza, updatePizza);
 			System.out.println("Pizza mise à jour");
-		} catch (SavePizzaException e) {
-			System.err.println("Echec mise à jour pizza");
-		} catch (UpdatePizzaException e) {
-			System.err.println("Echec mise à jour pizza");
 		} catch (DaoException e) {
 			e.printStackTrace();
 			System.err.println("Echec mise à jour pizza");

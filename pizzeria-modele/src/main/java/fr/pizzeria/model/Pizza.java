@@ -31,6 +31,7 @@ public class Pizza {
 	private BigDecimal prix;
 	@ToString @Enumerated(EnumType.STRING)
 	private CategoriePizza categorie;
+	private String url_image;
 	
 	
 	public static int nbPizzas;
@@ -39,12 +40,14 @@ public class Pizza {
 		// constructeur par défaut
 	}
 
-	public Pizza(String code, String nom, BigDecimal prix, CategoriePizza cat) {
+	public Pizza(String code, String nom, BigDecimal prix, 
+			CategoriePizza cat, String url_image) {
 		this();
 		this.code = code;
 		this.nom = nom;
 		this.prix = prix;
 		this.categorie = cat;
+		this.url_image = url_image;
 	}
 
 	public int getId() {
@@ -96,6 +99,17 @@ public class Pizza {
 	public void setCategorie(CategoriePizza categorie) {
 		this.categorie = categorie;
 	}
+	
+	
+	public String getUrl_image() {
+		return url_image;
+	}
+
+	public void setUrl_image(String url_image) {
+		this.url_image = url_image;
+	}
+	
+	
 	
 	private final static Map<String, String> FORMAT = new HashMap<String, String>();
 	private final static String AUTRE_FORMAT = "(%s)";
@@ -161,5 +175,7 @@ public class Pizza {
 	                 .append(prix, rhs.prix)
 	                 .isEquals();
 	}
+
+	
 
 }
