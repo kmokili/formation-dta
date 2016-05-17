@@ -40,15 +40,15 @@ public class PizzaDaoImplTest {
 	public void setUp() throws Exception {
 		pizzaDaoImpl = new PizzaDaoImpl();
 		listePizzaInitiales = new ArrayList<Pizza>();
-		listePizzaInitiales.add(new Pizza("PEP", "Pépéroni", BigDecimal.valueOf(12.50), CategoriePizza.VIANDE));           
-		listePizzaInitiales.add(new Pizza("MAR", "Margherita", BigDecimal.valueOf(14.00),  CategoriePizza.SANS_VIANDE));   
-		listePizzaInitiales.add(new Pizza("REI", "La Reine", BigDecimal.valueOf(11.50), CategoriePizza.VIANDE));           
-		listePizzaInitiales.add(new Pizza("FRO", "La 4 fromages", BigDecimal.valueOf(12.00),  CategoriePizza.SANS_VIANDE));
-		listePizzaInitiales.add(new Pizza("CAN", "La cannibale", BigDecimal.valueOf(12.50), CategoriePizza.VIANDE));       
-		listePizzaInitiales.add(new Pizza("SAV", "La savoyarde", BigDecimal.valueOf(13.00), CategoriePizza.VIANDE));       
-		listePizzaInitiales.add(new Pizza("ORI", "L'orientale", BigDecimal.valueOf(13.50), CategoriePizza.VIANDE));        
-		listePizzaInitiales.add(new Pizza("IND", "L'indienne", BigDecimal.valueOf(14.00), CategoriePizza.VIANDE));         
-		listePizzaInitiales.add(new Pizza("SAU", "La Saumonéta", BigDecimal.valueOf(14.00), CategoriePizza.POISSON));      
+		listePizzaInitiales.add(new Pizza("PEP", "Pépéroni", BigDecimal.valueOf(12.50), CategoriePizza.VIANDE, null));           
+		listePizzaInitiales.add(new Pizza("MAR", "Margherita", BigDecimal.valueOf(14.00),  CategoriePizza.SANS_VIANDE, null));   
+		listePizzaInitiales.add(new Pizza("REI", "La Reine", BigDecimal.valueOf(11.50), CategoriePizza.VIANDE, null));           
+		listePizzaInitiales.add(new Pizza("FRO", "La 4 fromages", BigDecimal.valueOf(12.00),  CategoriePizza.SANS_VIANDE, null));
+		listePizzaInitiales.add(new Pizza("CAN", "La cannibale", BigDecimal.valueOf(12.50), CategoriePizza.VIANDE, null));       
+		listePizzaInitiales.add(new Pizza("SAV", "La savoyarde", BigDecimal.valueOf(13.00), CategoriePizza.VIANDE, null));       
+		listePizzaInitiales.add(new Pizza("ORI", "L'orientale", BigDecimal.valueOf(13.50), CategoriePizza.VIANDE, null));        
+		listePizzaInitiales.add(new Pizza("IND", "L'indienne", BigDecimal.valueOf(14.00), CategoriePizza.VIANDE, null));         
+		listePizzaInitiales.add(new Pizza("SAU", "La Saumonéta", BigDecimal.valueOf(14.00), CategoriePizza.POISSON, null));      
 		listePizzaInitiales.sort(Comparator.comparing(Pizza::getCode));
 	}
 
@@ -72,7 +72,7 @@ public class PizzaDaoImplTest {
 
 	@Test
 	public void testSavePizzaCodeNonExistant() throws DaoException {
-		Pizza newPizza = new Pizza("CODE_INEXISTANT", "Nouveau nom", BigDecimal.valueOf(15), CategoriePizza.VIANDE);
+		Pizza newPizza = new Pizza("CODE_INEXISTANT", "Nouveau nom", BigDecimal.valueOf(15), CategoriePizza.VIANDE, null);
 		pizzaDaoImpl.savePizza(newPizza);
 		List<Pizza> listPizzas = pizzaDaoImpl.findAllPizzas();
 		assertTrue(listPizzas.contains(newPizza));
@@ -81,13 +81,13 @@ public class PizzaDaoImplTest {
 	
 	@Test (expected = SavePizzaException.class)
 	public void testSavePizzaCodeExistant() throws DaoException {
-		Pizza newPizza = new Pizza("PEP", "Nouveau nom", BigDecimal.valueOf(15), CategoriePizza.VIANDE);
+		Pizza newPizza = new Pizza("PEP", "Nouveau nom", BigDecimal.valueOf(15), CategoriePizza.VIANDE, null);
 		pizzaDaoImpl.savePizza(newPizza);
 	}
 	
 	@Test
 	public void testUpdatePizzaCodeExistant() throws DaoException {
-		Pizza updatePizza = new Pizza("PEP", "PEP2", BigDecimal.valueOf(15), CategoriePizza.VIANDE);
+		Pizza updatePizza = new Pizza("PEP", "PEP2", BigDecimal.valueOf(15), CategoriePizza.VIANDE, null);
 		pizzaDaoImpl.updatePizza("PEP", updatePizza);
 		List<Pizza> listPizzas = pizzaDaoImpl.findAllPizzas();
 		Optional<Pizza> pizzaOpt = listPizzas.stream().filter(p -> "PEP".equals(p.getCode())).findFirst();
