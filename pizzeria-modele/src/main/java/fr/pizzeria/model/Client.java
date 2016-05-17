@@ -1,9 +1,13 @@
 package fr.pizzeria.model;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Client {
@@ -15,6 +19,8 @@ public class Client {
 	private String email;
 	private String mot_de_passe;
 	
+	@OneToMany(mappedBy="client")
+	private Set<Commande> commandes;
 	
 	public Client() {
 		// constructeur par défaut
@@ -26,6 +32,7 @@ public class Client {
 		this.prenom = prenom;
 		this.email = email;
 		this.mot_de_passe = mdp;
+		this.commandes = new HashSet<Commande>();
 	}
 
 	public Integer getId() {
@@ -75,6 +82,14 @@ public class Client {
 
 	public void setMot_de_passe(String mot_de_passe) {
 		this.mot_de_passe = mot_de_passe;
+	}
+
+	public Set<Commande> getCommandes() {
+		return commandes;
+	}
+
+	public void setCommandes(Set<Commande> commandes) {
+		this.commandes = commandes;
 	}
 
 }
