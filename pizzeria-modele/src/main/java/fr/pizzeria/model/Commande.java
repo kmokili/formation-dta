@@ -1,12 +1,15 @@
 package fr.pizzeria.model;
 
 import java.sql.Date;
+import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
 @Entity
@@ -21,24 +24,35 @@ public class Commande {
 	private Date date_commande;
 	
 	@ManyToOne
-	@JoinColumn(name="id")
-	private Integer livreur_id;
+	@JoinColumn(name="livreur_id")
+	private Livreur livreur;
 	@ManyToOne
-	@JoinColumn(name="id")
-	private Integer client_id;
+	@JoinColumn(name="client_id")
+	private Client client;
+	
+	@ManyToMany
+	@JoinTable(name="commande_pizza",
+		joinColumns=
+	@JoinColumn(name="commande_id", referencedColumnName="id"),
+		inverseJoinColumns=
+	@JoinColumn(name="pizza_id", referencedColumnName="id")
+			)
+	private Set<Pizza> pizzas;
+	
+	
 	
 	public Commande() {
 		// implémentation par défaut
 	}
 
 	public Commande(Integer numCommande, Statut statut, 
-			Date date_commande, Integer livreur_id, Integer client_id) {
+			Date date_commande, Livreur livreur, Client client) {
 		this();
 		this.numero_commande = numCommande;
 		this.statut = statut;
 		this.date_commande = date_commande;
-		this.livreur_id = livreur_id;
-		this.client_id = client_id;
+		this.livreur = livreur;
+		this.client = client;
 	}
 
 	public Integer getId() {
@@ -73,20 +87,22 @@ public class Commande {
 		this.date_commande = date_commande;
 	}
 
-	public Integer getLivreur_id() {
-		return livreur_id;
+	public Livreur getLivreur() {
+		return livreur;
 	}
 
-	public void setLivreur_id(Integer livreur_id) {
-		this.livreur_id = livreur_id;
+	public void setLivreur(Livreur livreur) {
+		this.livreur = livreur;
 	}
 
-	public Integer getClient_id() {
-		return client_id;
+	public Client getClient() {
+		return client;
 	}
 
-	public void setClient_id(Integer client_id) {
-		this.client_id = client_id;
+	public void setClient(Client client) {
+		this.client = client;
 	}
+
+	
 	
 }
