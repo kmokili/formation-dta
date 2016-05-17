@@ -103,6 +103,14 @@ public class Commande {
 		this.client = client;
 	}
 
+	public Set<Pizza> getPizzas() {
+		return pizzas;
+	}
+
+	public void setPizzas(Set<Pizza> pizzas) {
+		this.pizzas = pizzas;
+	}
+
 	
 	
 }
