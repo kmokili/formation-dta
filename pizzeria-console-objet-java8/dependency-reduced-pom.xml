@@ -52,13 +52,16 @@
     <profile>
       <id>dev</id>
       <properties>
-        <dao.impl>0</dao.impl>
+        <jdbc.url>jdbc:mysql://localhost:3306/pizzeria</jdbc.url>
+        <jdbc.driver>com.mysql.jdbc.Driver</jdbc.driver>
+        <jdbc.user>root</jdbc.user>
+        <dao.impl>3</dao.impl>
       </properties>
     </profile>
     <profile>
       <id>prod</id>
       <properties>
-        <dao.impl>1</dao.impl>
+        <dao.impl>3</dao.impl>
       </properties>
     </profile>
   </profiles>

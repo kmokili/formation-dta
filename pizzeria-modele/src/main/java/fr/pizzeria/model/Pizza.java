@@ -1,34 +1,45 @@
 package fr.pizzeria.model;
 
 import java.lang.reflect.Field;
+import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
+@Entity
 public class Pizza {
 
 	
-	
-	private int id;
-	@ToString private String code;
+	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
+	private Integer id;
+	@ToString 
+	private String code;
 	@ToString(uppercase = true) private String nom;
 	@ToString 
-	private double prix;
-	@ToString 
+	private BigDecimal prix;
+	@ToString @Enumerated(EnumType.STRING)
 	private CategoriePizza categorie;
 	
 	
 	public static int nbPizzas;
 
 	public Pizza() {
+		// constructeur par défaut
 	}
 
-	public Pizza(String code, String nom, double prix, CategoriePizza cat) {
+	public Pizza(String code, String nom, BigDecimal prix, CategoriePizza cat) {
 		this();
 		this.code = code;
 		this.nom = nom;
@@ -64,16 +75,16 @@ public class Pizza {
 	 * Utiliser plutôt getNouveauPrix()
 	 * @return
 	 */
-	public double getPrix() {
+	public BigDecimal getPrix() {
 		return prix;
 	}
 	
-	public double getNouveauPrix() {
+	public BigDecimal getNouveauPrix() {
 		// super algo
 		return prix;
 	}
 
-	public void setPrix(double prix) {
+	public void setPrix(BigDecimal prix) {
 		this.prix = prix;
 	}
 
@@ -81,9 +92,6 @@ public class Pizza {
 		return categorie;
 	}
 	
-	public void cattt(Pizza p) {
-
-	}
 
 	public void setCategorie(CategoriePizza categorie) {
 		this.categorie = categorie;
@@ -122,30 +130,7 @@ public class Pizza {
 		};
 	}
 
-//	@Override
-//	public int hashCode() {
-//		final int prime = 31;
-//		int result = 1;
-//		result = prime * result + ((categorie == null) ? 0 : categorie.hashCode());
-//		result = prime * result + ((code == null) ? 0 : code.hashCode());
-//		result = prime * result + id;
-//		result = prime * result + ((nom == null) ? 0 : nom.hashCode());
-//		long temp;
-//		temp = Double.doubleToLongBits(prix);
-//		result = prime * result + (int) (temp ^ (temp >>> 32));
-//		return result;
-//	}
-//
-//	
-//	public int hashCode() {
-//	     // you pick a hard-coded, randomly chosen, non-zero, odd number
-//	     // ideally different for each class
-//	     return new HashCodeBuilder(17, 37).
-//	       append(name).
-//	       append(age).
-//	       append(smoker).
-//	       toHashCode();
-//	}
+
 	
 	@Override
 	public int hashCode() {
@@ -158,39 +143,12 @@ public class Pizza {
 	}
 	
 	
-//	@Override
-//	public boolean equals(Object obj) {
-//		if (this == obj)
-//			return true;
-//		if (obj == null)
-//			return false;
-//		if (getClass() != obj.getClass())
-//			return false;
-//		Pizza other = (Pizza) obj;
-//		if (categorie != other.categorie)
-//			return false;
-//		if (code == null) {
-//			if (other.code != null)
-//				return false;
-//		} else if (!code.equals(other.code))
-//			return false;
-//		if (id != other.id)
-//			return false;
-//		if (nom == null) {
-//			if (other.nom != null)
-//				return false;
-//		} else if (!nom.equals(other.nom))
-//			return false;
-//		if (Double.doubleToLongBits(prix) != Double.doubleToLongBits(other.prix))
-//			return false;
-//		return true;
-//	}
-	
-	
 	@Override
 	public boolean equals(Object obj) {
-	   if (obj == null) { return false; }
-	   if (obj == this) { return true; }
+	   if (obj == null) 
+	   	{ return false; }
+	   if (obj == this) 
+	   	{ return true; }
 	   if (obj.getClass() != getClass()) {
 	     return false;
 	   }
@@ -203,33 +161,5 @@ public class Pizza {
 	                 .append(prix, rhs.prix)
 	                 .isEquals();
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-
-	
-	
-	
-	
-	
 
 }
