@@ -15,6 +15,11 @@
   	<servlet-class>fr.pizzeria.admin.web.PizzaServletWebApi</servlet-class>
   </servlet>
   
+   <servlet>
+  	<servlet-name>ListerPizzaController</servlet-name>
+  	<servlet-class>fr.pizzeria.admin.web.ListerPizzaController</servlet-class>
+  </servlet>
+  
   <servlet-mapping>
   	<servlet-name>HelloServlet</servlet-name>
   	<url-pattern>/hello</url-pattern>
@@ -23,6 +28,11 @@
    <servlet-mapping>
   	<servlet-name>PizzaServletWebApi</servlet-name>
   	<url-pattern>/api/servlet/pizzas</url-pattern>
+  </servlet-mapping>
+  
+   <servlet-mapping>
+  	<servlet-name>ListerPizzaController</servlet-name>
+  	<url-pattern>/pizzas/list</url-pattern>
   </servlet-mapping>
   
 </web-app>

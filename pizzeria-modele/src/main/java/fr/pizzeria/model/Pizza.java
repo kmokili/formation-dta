@@ -40,6 +40,15 @@ public class Pizza {
 	public Pizza() {
 		// constructeur par défaut
 	}
+	
+	public Pizza(String code, String nom, BigDecimal prix, 
+			CategoriePizza cat) {
+		this();
+		this.code = code;
+		this.nom = nom;
+		this.prix = prix;
+		this.categorie = cat;
+	}
 
 	public Pizza(String code, String nom, BigDecimal prix, 
 			CategoriePizza cat, String url_image) {
@@ -51,11 +60,11 @@ public class Pizza {
 		this.url_image = url_image;
 	}
 
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
