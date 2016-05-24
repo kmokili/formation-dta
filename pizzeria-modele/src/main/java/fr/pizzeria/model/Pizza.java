@@ -5,6 +5,7 @@ import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.StringJoiner;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -155,6 +156,15 @@ public class Pizza {
 			       append(nom).
 			       toHashCode();
 	}
+	
+	public String toJson() {
+		StringBuilder sb = new StringBuilder("{");
+		sb.append("\"nom\" : \"").append(this.getNom()).append("\"")
+		.append("\"code\" : \"").append(this.getCode());
+		return sb.toString();
+	}
+	
+	
 	
 	
 	@Override
