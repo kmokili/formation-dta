@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -11,7 +12,7 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang3.StringUtils;
 
-
+@WebServlet("/login")
 public class LoginController extends HttpServlet {
 
 	@Override
@@ -30,12 +31,12 @@ public class LoginController extends HttpServlet {
 		{
 			resp.sendError(400, "Non non non ! Zone interdite");
 		} 
-		else if ((StringUtils.equals(email, "admin@pizzeria.fr") 
-			&&  (StringUtils.equals(password, "admin"))))
+		else if ( StringUtils.equals(email, "admin@pizzeria.fr") 
+			&&  StringUtils.equals(password, "admin"))
 		{
 			HttpSession session = req.getSession();
 			session.setAttribute("email", email);
-			
+			resp.sendRedirect(req.getContextPath() + "/pizzas/list");
 		} 
 		else
 		{

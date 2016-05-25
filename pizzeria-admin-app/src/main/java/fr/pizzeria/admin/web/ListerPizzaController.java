@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -14,6 +15,7 @@ import fr.pizzeria.dao.PizzaDaoImpl;
 import fr.pizzeria.exception.DaoException;
 import fr.pizzeria.model.Pizza;
 
+@WebServlet("/pizzas/list")
 public class ListerPizzaController extends HttpServlet {
 
 	private IPizzaDao pizzaDao = new PizzaDaoImpl();
