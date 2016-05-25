@@ -1,5 +1,9 @@
 <!DOCTYPE html>
+<%@page import="fr.pizzeria.model.CategoriePizza"%>
 <%@page import="fr.pizzeria.model.Pizza"%>
+<%@ page isELIgnored="false" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <html>
 	<head>
 		<meta charset="utf-8">
@@ -11,9 +15,11 @@
 		<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 		
 	</head>
+	
+
 	<body>
-		<% Pizza p = (Pizza) request.getAttribute("pizza");%>
-		<form class="form-horizontal" action="<%=request.getContextPath() %>/pizzas/edit" method="post">
+
+		<form class="form-horizontal" action="<c:url value="/pizzas/edit" /> method="post">
 			<fieldset>
 				
 				<!-- Form Name -->
@@ -23,15 +29,15 @@
 				<div class="form-group">
 				  <label class="col-md-4 control-label" for="code">Code</label>  
 				  <div class="col-md-4">
-				  <input id="code" name="code" type="text" placeholder="Code pizza" class="form-control input-md" value="<%=p.getCode() %>">
+				  <input id="code" name="code" type="text" placeholder="Code pizza" class="form-control input-md" value="${pizza.code}">
 					
 				  </div>
 				</div>
 				
 				<div class="form-group">
-				  <label class="col-md-4 control-label" for="textinput">Nom</label>  
+				  <label class="col-md-4 control-label" for="nom">Nom</label>  
 				  <div class="col-md-4">
-				  <input id="textinput" name="nom" type="text" placeholder="Votre nom" class="form-control input-md"  value="<%=p.getNom() %>">				
+				  <input id="nom" name="nom" type="text" placeholder="Votre nom" class="form-control input-md"  value="${pizza.nom}">				
 				  </div>
 				</div>
 				
@@ -39,36 +45,28 @@
 				<div class="form-group">
 				  <label class="col-md-4 control-label" for="textinput">Image</label>  
 				  <div class="col-md-4">
-				  <input id="textinput" name="url_image" type="text" placeholder="Votre nom" class="form-control input-md" value="<%=p.getUrl_image() %>">
+				  <input id="textinput" name="url_image" type="text" placeholder="Votre nom" class="form-control input-md" value=">
 					
 				  </div>
 				</div>
 				-->
 				<div class="form-group">
-				  <label class="col-md-4 control-label" for="textinput">Prix</label>  
+				  <label class="col-md-4 control-label" for="prix">Prix</label>  
 				  <div class="col-md-4">
-				  <input id="textinput" name="prix" type="text" placeholder="Prix" class="form-control input-md" value="<%=p.getPrix() %>">
+				  <input id="prix" name="prix" type="text" placeholder="Prix" class="form-control input-md" value="${pizza.prix}">
 					
 				  </div>
 				</div>
 				
-				<div class="form-group">
-				  <label class="col-md-4 control-label" for="textinput">Catégorie</label>  
-				  <div class="col-md-4">
-				  <input id="textinput" name="categorie" type="text" placeholder="Prix" class="form-control input-md" value="<%=p.getCategorie().getLibelle() %>">
-					
-				  </div>
-				</div>
 	
 				<div class="form-group">
-				  <label class="col-md-4 control-label" for="textinput">Catégorie</label>  
+				  <label class="col-md-4 control-label" for="categorie">Catégorie</label>
 				  <div class="col-md-4">
-				  <input id="textinput" name="categorie" type="text" placeholder="Prix" class="form-control input-md" value="<%=p.getCategorie().getLibelle() %>">
-					<select id="categorie" name="categorie">
-					  <option value="viande">Volvo</option>
-					  <option value="poisson">Saab</option>
-					  <option value="sans_viande">Opel</option>
-					</select>
+				    <select id="categorie" name="categorie" class="form-control">
+				      <option <c:if test="${pizza.categorie.equals(CategoriePizza.VIANDE)}">selected</c:if> value="${CategoriePizza.VIANDE}">Viande</option>
+				      <option <c:if test="${pizza.categorie.equals(CategoriePizza.SANS_VIANDE)}">selected</c:if> value="${CategoriePizza.SANS_VIANDE}">Sans viande</option>
+				      <option <c:if test="${pizza.categorie.equals(CategoriePizza.POISSON)}">selected</c:if> value="${CategoriePizza.POISSON}">Poisson</option>
+				    </select>
 				  </div>
 				</div>
 	

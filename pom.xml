@@ -9,6 +9,7 @@
   	<module>pizzeria-modele</module>
   	<module>pizzeria-dao</module>
   	<module>pizzeria-console-objet-java8</module>
+  	<module>pizzeria-admin-app</module>
   </modules>
   
   <properties>
@@ -21,6 +22,7 @@
 		<hibernate.version>5.1.0.Final</hibernate.version>
 		<commons-collections.version>4.1</commons-collections.version>
 		<javax.servlet.version>3.1.0</javax.servlet.version>
+		<jstl.version>1.2</jstl.version>
   </properties>
   
   <dependencyManagement>
@@ -89,6 +91,12 @@
 		    <groupId>javax.servlet</groupId>
 		    <artifactId>javax.servlet-api</artifactId>
 		    <version>${javax.servlet.version}</version>
+		    <scope>provided</scope>
+		</dependency>
+		<dependency>
+		    <groupId>jstl</groupId>
+		    <artifactId>jstl</artifactId>
+		    <version>${jstl.version}</version>
 		    <scope>provided</scope>
 		</dependency>
 		

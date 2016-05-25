@@ -1,6 +1,8 @@
 <%@page import="fr.pizzeria.model.Pizza" %>
 <%@page import="java.util.List" %>
 <%@page import="java.util.Date" %>
+<%@ page isELIgnored="false" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -23,27 +25,22 @@
 					<td>NOM</td>
 					<!-- <td>IMAGE</td> -->
 					<td>PRIX</td>
-					<td></td>
+					<td>CATEGORIE</td>
 					<td></td>
 				</tr>
 			</thead>
 			<tbody>
-				<%
-					List<Pizza> listPizzas = (List<Pizza>) request.getAttribute("listePizzas");
-					for (Pizza p : listPizzas) {
-				%>
-				<tr>
-					<td><%=p.getId()%></td>
-					<td><%=p.getCode() %></td>
-					<td><%=p.getNom() %></td>
-					<!-- <td><img src="http://placehold.it/150x150"></td> -->
-					<td><%=p.getPrix() %></td>
-					<td><a class="btn btn-success" href="<%=request.getContextPath() %>/pizzas/edit?code=<%= p.getCode() %>">Editer</a></td>
-					<td><a class="btn btn-danger" href="<%=request.getContextPath() %>/pizzas/edit?code=<%= p.getCode() %>">Supprimer</a></td>
-				</tr>
-				<%
-					}
-				%>
+				<c:forEach var="pizza" items="${listePizzas}">
+					<tr>
+						<td> ${pizza.id} </td>
+						<td> ${pizza.code} </td>
+						<td> ${pizza.nom} </td>
+						<td> ${pizza.prix} </td>
+						<td> ${pizza.categorie} </td>
+						<td><a class="btn btn-success" href="<c:url value='/pizzas/edit?code=${pizza.code}' />">Editer</a></td>
+						<td><a class="btn btn-danger" href="<c:url value='/pizzas/delete?code=${pizza.code}' />">Supprimer</a></td>
+					</tr>
+				</c:forEach>	
 			</tbody>
 		</table>
 		
