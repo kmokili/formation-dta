@@ -8,9 +8,9 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<title>Lister Pizzas</title>
-  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
-  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+		<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+		<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 	</head>
 	<body>
 		<h1>Page Lister Pizzas</h1>
@@ -38,8 +38,8 @@
 					<td><%=p.getNom() %></td>
 					<td><img src="http://placehold.it/150x150"></td>
 					<td><%=p.getPrix() %></td>
-					<td><a class="btn btn-primary" href="<%=request.getContextPath() %>/pizzas/edit?code=<%= p.getCode() %>">Editer</a></td>
-					<td></td>
+					<td><a class="btn btn-success" href="<%=request.getContextPath() %>/pizzas/edit?code=<%= p.getCode() %>">Editer</a></td>
+					<td><a class="btn btn-danger" href="<%=request.getContextPath() %>/pizzas/edit?code=<%= p.getCode() %>">Supprimer</a></td>
 				</tr>
 				<%
 					}

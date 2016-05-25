@@ -20,6 +20,11 @@
   	<servlet-class>fr.pizzeria.admin.web.ListerPizzaController</servlet-class>
   </servlet>
   
+   <servlet>
+  	<servlet-name>EditerPizzaController</servlet-name>
+  	<servlet-class>fr.pizzeria.admin.web.EditerPizzaController</servlet-class>
+  </servlet>
+  
   <servlet-mapping>
   	<servlet-name>HelloServlet</servlet-name>
   	<url-pattern>/hello</url-pattern>
@@ -33,6 +38,11 @@
    <servlet-mapping>
   	<servlet-name>ListerPizzaController</servlet-name>
   	<url-pattern>/pizzas/list</url-pattern>
+  </servlet-mapping>
+  
+   <servlet-mapping>
+  	<servlet-name>EditerPizzaController</servlet-name>
+  	<url-pattern>/pizzas/edit</url-pattern>
   </servlet-mapping>
   
 </web-app>
