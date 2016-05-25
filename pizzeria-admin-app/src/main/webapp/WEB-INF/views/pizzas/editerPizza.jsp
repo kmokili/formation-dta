@@ -21,9 +21,9 @@
 				
 				<!-- Text input-->
 				<div class="form-group">
-				  <label class="col-md-4 control-label" for="textinput">Code</label>  
+				  <label class="col-md-4 control-label" for="code">Code</label>  
 				  <div class="col-md-4">
-				  <input id="textinput" name="code" type="text" placeholder="Code" class="form-control input-md" value="<%=p.getCode() %>">
+				  <input id="code" name="code" type="text" placeholder="Code pizza" class="form-control input-md" value="<%=p.getCode() %>">
 					
 				  </div>
 				</div>
@@ -64,11 +64,10 @@
 				  <label class="col-md-4 control-label" for="textinput">Catégorie</label>  
 				  <div class="col-md-4">
 				  <input id="textinput" name="categorie" type="text" placeholder="Prix" class="form-control input-md" value="<%=p.getCategorie().getLibelle() %>">
-					<select>
-					  <option value="volvo">Volvo</option>
-					  <option value="saab">Saab</option>
-					  <option value="opel">Opel</option>
-					  <option value="audi">Audi</option>
+					<select id="categorie" name="categorie">
+					  <option value="viande">Volvo</option>
+					  <option value="poisson">Saab</option>
+					  <option value="sans_viande">Opel</option>
 					</select>
 				  </div>
 				</div>

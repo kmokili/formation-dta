@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 import javax.servlet.RequestDispatcher;
@@ -22,7 +23,8 @@ import fr.pizzeria.model.Pizza;
 
 public class EditerPizzaController extends HttpServlet {
 
-	private IPizzaDao pizzaDao = new PizzaDaoImpl();
+	private IPizzaDao pizzaDao = IPizzaDao.DEFAULT_IMPLEMENTATION;
+	private static final Logger LOG = Logger.getLogger(EditerPizzaController.class.toString());
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
@@ -73,6 +75,7 @@ public class EditerPizzaController extends HttpServlet {
 				try {
 					pizzaDao.savePizza(newPizza);
 					resp.setStatus(201);
+					resp.sendRedirect(req.getContextPath() + "/pizzas/list");
 				} catch (NumberFormatException e) {
 					resp.sendError(500, "Désolé");	
 				} catch (DaoException e) {

@@ -21,7 +21,7 @@
 					<td>ID</td>
 					<td>CODE</td>
 					<td>NOM</td>
-					<td>IMAGE</td>
+					<!-- <td>IMAGE</td> -->
 					<td>PRIX</td>
 					<td></td>
 					<td></td>
@@ -36,7 +36,7 @@
 					<td><%=p.getId()%></td>
 					<td><%=p.getCode() %></td>
 					<td><%=p.getNom() %></td>
-					<td><img src="http://placehold.it/150x150"></td>
+					<!-- <td><img src="http://placehold.it/150x150"></td> -->
 					<td><%=p.getPrix() %></td>
 					<td><a class="btn btn-success" href="<%=request.getContextPath() %>/pizzas/edit?code=<%= p.getCode() %>">Editer</a></td>
 					<td><a class="btn btn-danger" href="<%=request.getContextPath() %>/pizzas/edit?code=<%= p.getCode() %>">Supprimer</a></td>
