@@ -2,13 +2,17 @@ package fr.pizzeria.admin.metier;
 
 import java.util.List;
 
+import javax.enterprise.context.SessionScoped;
+import javax.inject.Inject;
+
 import fr.pizzeria.dao.IPizzaDao;
 import fr.pizzeria.exception.DaoException;
 import fr.pizzeria.model.Pizza;
 
+@SessionScoped
 public class PizzaService {
 	
-	private IPizzaDao pizzaDao;
+	@Inject private IPizzaDao pizzaDao;
 
 	public PizzaService() {
 		super();

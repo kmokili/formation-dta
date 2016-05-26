@@ -19,17 +19,18 @@ import fr.pizzeria.model.Pizza;
 
 @WebServlet("/pizzas/list")
 public class ListerPizzaController extends HttpServlet {
-
-	private IPizzaDao pizzaDao = new PizzaDaoImpl();
+	
+	private static final String VUE_LISTER_PIZZA = "/WEB-INF/views/pizzas/listerPizzas.jsp";
 	@Inject private PizzaService pizzaService;
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
 		try {
-			List<Pizza> listPizzas = pizzaDao.findAllPizzas();
+			List<Pizza> listPizzas = this.pizzaService.findAllPizzas();
 			req.setAttribute("listePizzas", listPizzas);
+			
 			RequestDispatcher dispatcher = this.getServletContext()
-					.getRequestDispatcher("/WEB-INF/views/pizzas/listerPizzas.jsp");
+					.getRequestDispatcher(VUE_LISTER_PIZZA);
 			dispatcher.forward(req, resp);
 		
 		} catch (DaoException e) {

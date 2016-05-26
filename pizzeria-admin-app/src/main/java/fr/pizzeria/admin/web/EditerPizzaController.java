@@ -26,9 +26,11 @@ import fr.pizzeria.model.Pizza;
 
 @WebServlet("/pizzas/edit")
 public class EditerPizzaController extends HttpServlet {
-
-	private IPizzaDao pizzaDao = IPizzaDao.DEFAULT_IMPLEMENTATION;
+	
+	private static final String URL = "/pizzas/list";
+	private static final String VUE_EDITER_PIZZA = "/WEB-INF/views/pizzas/editerPizza.jsp";
 	private static final Logger LOG = Logger.getLogger(EditerPizzaController.class.toString());
+	
 	@Inject private PizzaService pizzaService;
 	
 	@Override
@@ -37,22 +39,23 @@ public class EditerPizzaController extends HttpServlet {
 		
 		if (StringUtils.isBlank(code)) {
 			resp.sendRedirect("/pizzas/list?msgErrreur=Pizza non trouvée");
+			req.setAttribute("msgErreur", "Code requis pour éditer une pizza");
+			this.getServletContext().getRequestDispatcher(VUE_EDITER_PIZZA).forward(req, resp);
 		} else {
 			try {
 				
-				Optional<Pizza> pizzaOpt = pizzaDao.findAllPizzas()
-						.stream()
-						.filter(p->code.equals(p.getCode()))
+				Optional<Pizza> pizza = this.pizzaService.findAllPizzas()
+						.stream().filter(p->code.equals(p.getCode()))
 						.findFirst();
 				
-				if (pizzaOpt.isPresent()) {
-					req.setAttribute("pizza", pizzaOpt);
-					Pizza p = pizzaOpt.get();
+				if (pizza.isPresent()) {
+					req.setAttribute("pizza", pizza);
+					Pizza p = pizza.get();
 					req.setAttribute("pizza", p);
 					resp.setStatus(200);
 					
 					RequestDispatcher dispatcher = this.getServletContext()
-							.getRequestDispatcher("/WEB-INF/views/pizzas/editerPizza.jsp");
+							.getRequestDispatcher(VUE_EDITER_PIZZA);
 					dispatcher.forward(req, resp);
 				}
 			
@@ -78,9 +81,9 @@ public class EditerPizzaController extends HttpServlet {
 			} else {
 				Pizza newPizza = new Pizza(code, nom, new BigDecimal(prix), CategoriePizza.valueOf(cat));
 				try {
-					pizzaDao.savePizza(newPizza);
+					pizzaService.savePizza(newPizza);
 					resp.setStatus(201);
-					resp.sendRedirect(req.getContextPath() + "/pizzas/list");
+					resp.sendRedirect(req.getContextPath() + URL);
 				} catch (NumberFormatException e) {
 					resp.sendError(500, "Désolé");	
 				} catch (DaoException e) {
