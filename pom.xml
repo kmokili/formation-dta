@@ -23,6 +23,7 @@
 		<commons-collections.version>4.1</commons-collections.version>
 		<javax.servlet.version>3.1.0</javax.servlet.version>
 		<jstl.version>1.2</jstl.version>
+		<javaee-api.version>7.0</javaee-api.version>
   </properties>
   
   <dependencyManagement>
@@ -97,6 +98,12 @@
 		    <groupId>jstl</groupId>
 		    <artifactId>jstl</artifactId>
 		    <version>${jstl.version}</version>
+		    <scope>provided</scope>
+		</dependency>
+		<dependency>
+		    <groupId>javax</groupId>
+		    <artifactId>javaee-api</artifactId>
+		    <version>${javaee-api.version}</version>
 		    <scope>provided</scope>
 		</dependency>
 		

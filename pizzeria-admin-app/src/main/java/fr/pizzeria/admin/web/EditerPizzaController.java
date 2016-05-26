@@ -83,7 +83,8 @@ public class EditerPizzaController extends HttpServlet {
 			} else {
 				Pizza newPizza = new Pizza(code, nom, new BigDecimal(prix), CategoriePizza.valueOf(cat));
 				try {
-					pizzaService.savePizza(newPizza);
+//					pizzaService.savePizza(newPizza);
+					pizzaService.updatePizza(code, newPizza);
 					resp.setStatus(201);
 					resp.sendRedirect(req.getContextPath() + URL);
 					RequestDispatcher dispatcher = this.getServletContext()

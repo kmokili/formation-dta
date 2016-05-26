@@ -21,18 +21,8 @@
 			<artifactId>pizzeria-dao</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>javax.servlet</groupId>
-			<artifactId>javax.servlet-api</artifactId>
-		</dependency>
-		<dependency>
 		 	<groupId>jstl</groupId>
 		    <artifactId>jstl</artifactId>
-		</dependency>
-		<dependency>
-		   <groupId>javax.enterprise</groupId>
-		   <artifactId>cdi-api</artifactId>
-		   <version>1.2</version>
-		   <scope>provided</scope>
 		</dependency>
 		<dependency>
 		    <groupId>javax</groupId>
