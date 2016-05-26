@@ -7,6 +7,7 @@ import java.util.Optional;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
+import javax.inject.Inject;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -16,6 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang3.StringUtils;
 
+import fr.pizzeria.admin.metier.PizzaService;
 import fr.pizzeria.dao.IPizzaDao;
 import fr.pizzeria.dao.PizzaDaoImpl;
 import fr.pizzeria.exception.DaoException;
@@ -27,6 +29,7 @@ public class EditerPizzaController extends HttpServlet {
 
 	private IPizzaDao pizzaDao = IPizzaDao.DEFAULT_IMPLEMENTATION;
 	private static final Logger LOG = Logger.getLogger(EditerPizzaController.class.toString());
+	@Inject private PizzaService pizzaService;
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {

@@ -8,7 +8,7 @@ import fr.pizzeria.dao.PizzaDaoImpl;
 public class DaoProducer {
 
 	@Produces
-	public IPizzaDao getDao() {
+	public IPizzaDao getPizzaDao() {
 		return new PizzaDaoImpl();
 	}
 

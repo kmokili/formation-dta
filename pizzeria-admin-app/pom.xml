@@ -13,34 +13,34 @@
 	</parent>
 	  
   
-	  <name>pizzeria-admin-app Maven Webapp</name>
-	  <url>http://maven.apache.org</url>
-	  <dependencies>
-		   <dependency>
-			   <groupId>fr.pizzeria</groupId>
-			   <artifactId>pizzeria-dao</artifactId>
-		   </dependency>
-		   <dependency>
-				<groupId>javax.servlet</groupId>
-				<artifactId>javax.servlet-api</artifactId>
-			</dependency>
-			<dependency>
-			 	<groupId>jstl</groupId>
-			    <artifactId>jstl</artifactId>
-			</dependency>
-			<dependency>
-			   <groupId>javax.enterprise</groupId>
-			   <artifactId>cdi-api</artifactId>
-			   <version>1.2</version>
-			   <scope>provided</scope>
-			</dependency>
-	  </dependencies>
+	<name>pizzeria-admin-app Maven Webapp</name>
+	<url>http://maven.apache.org</url>
+	<dependencies>
+		<dependency>
+			<groupId>fr.pizzeria</groupId>
+			<artifactId>pizzeria-dao</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+		</dependency>
+		<dependency>
+		 	<groupId>jstl</groupId>
+		    <artifactId>jstl</artifactId>
+		</dependency>
+		<dependency>
+		   <groupId>javax.enterprise</groupId>
+		   <artifactId>cdi-api</artifactId>
+		   <version>1.2</version>
+		   <scope>provided</scope>
+		</dependency>
+	</dependencies>
 		
-	  <build>
-	    <finalName>pizzeria-admin-app</finalName>
-	     <plugins>
-	        <plugin>
-	            <groupId>org.apache.maven.plugins</groupId>
+	<build>
+		<finalName>pizzeria-admin-app</finalName>
+	    <plugins>
+	    	<plugin>
+	        	<groupId>org.apache.maven.plugins</groupId>
 	            <artifactId>maven-war-plugin</artifactId>
 	            <version>2.6</version>
 	            <configuration>
@@ -48,5 +48,5 @@
 	            </configuration>
 	        </plugin>
 	    </plugins>
-	  </build>
+	</build>
 </project>
