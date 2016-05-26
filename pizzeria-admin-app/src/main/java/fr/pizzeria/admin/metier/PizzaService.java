@@ -1,5 +1,6 @@
 package fr.pizzeria.admin.metier;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.enterprise.context.SessionScoped;
@@ -10,8 +11,12 @@ import fr.pizzeria.exception.DaoException;
 import fr.pizzeria.model.Pizza;
 
 @SessionScoped
-public class PizzaService {
+public class PizzaService implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	@Inject private IPizzaDao pizzaDao;
 
 	public PizzaService() {
