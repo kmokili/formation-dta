@@ -78,12 +78,17 @@ public class EditerPizzaController extends HttpServlet {
 			
 			if (StringUtils.isBlank(code) || StringUtils.isBlank(nom) || StringUtils.isBlank(prix) || StringUtils.isBlank(cat))  {
 				resp.sendError(400, "Non non non ! Donnez-moi toutes les valeurs !");
+				req.setAttribute("msgErreur", "Non non non ! Donnez-moi toutes les valeurs !");
+				this.getServletContext().getRequestDispatcher(VUE_EDITER_PIZZA).forward(req, resp);
 			} else {
 				Pizza newPizza = new Pizza(code, nom, new BigDecimal(prix), CategoriePizza.valueOf(cat));
 				try {
 					pizzaService.savePizza(newPizza);
 					resp.setStatus(201);
 					resp.sendRedirect(req.getContextPath() + URL);
+					RequestDispatcher dispatcher = this.getServletContext()
+							.getRequestDispatcher(VUE_EDITER_PIZZA);
+					dispatcher.forward(req, resp);
 				} catch (NumberFormatException e) {
 					resp.sendError(500, "Désolé");	
 				} catch (DaoException e) {

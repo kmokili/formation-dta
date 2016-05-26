@@ -19,7 +19,7 @@
 
 	<body>
 
-		<form class="form-horizontal" action="<c:url value="/pizzas/edit" /> method="post">
+		<form class="form-horizontal" action="<c:url value="/pizzas/edit" />" method="post">
 			<fieldset>
 				
 				<!-- Form Name -->
@@ -63,7 +63,7 @@
 				  <label class="col-md-4 control-label" for="categorie">Catégorie</label>
 				  <div class="col-md-4">
 				    <select id="categorie" name="categorie" class="form-control">
-				      <option <c:if test="${pizza.categorie.equals(CategoriePizza.VIANDE)}">selected</c:if> value="${CategoriePizza.VIANDE}">Viande</option>
+				      <option <c:if test="${pizza.categorie.equals(CategoriePizza.VIANDE)}">selected</c:if> value="<c:out value="${CategoriePizza.VIANDE}"/>">Viande</option>
 				      <option <c:if test="${pizza.categorie.equals(CategoriePizza.SANS_VIANDE)}">selected</c:if> value="${CategoriePizza.SANS_VIANDE}">Sans viande</option>
 				      <option <c:if test="${pizza.categorie.equals(CategoriePizza.POISSON)}">selected</c:if> value="${CategoriePizza.POISSON}">Poisson</option>
 				    </select>
@@ -74,16 +74,10 @@
 				<div class="form-group">
 				  <label class="col-md-4 control-label" for="singlebutton"></label>
 				  <div class="col-md-4">
-					<button id="singlebutton" name="singlebutton" class="btn btn-success">Envoyer</button>
+					<button type="submit" id="singlebutton" name="singlebutton" class="btn btn-success">Envoyer</button>
 				  </div>
 				</div>
 				
-				<div class="form-group">
-				  <label class="col-md-4 control-label" for="singlebutton"></label>
-				  <div class="col-md-4">
-					<button id="singlebutton" name="singlebutton" class="btn btn-primary" href="/pizzas/list">Retour à la liste des pizzas</button>
-				  </div>
-				</div>
 				
 
 			</fieldset>
