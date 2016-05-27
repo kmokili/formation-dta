@@ -17,6 +17,7 @@
 	<body>
 		<h1>Page Lister Pizzas</h1>
 		
+		<a class="btn btn-primary" href="<c:url value='/pizzas/new' />">Nouvelle pizza</a>
 		<table class="table table-striped">
 			<thead>
 				<tr>

@@ -30,7 +30,7 @@ public class PizzaService implements Serializable{
 	
 	public List<Pizza> findAllPizzas() throws DaoException {
 		TypedQuery<Pizza> query =
-			      em.createQuery("SELECT p FROM Pizza c", Pizza.class);
+			      em.createQuery("SELECT p FROM Pizza p", Pizza.class);
 		List<Pizza> resultats = query.getResultList();
 		
 		return resultats;
