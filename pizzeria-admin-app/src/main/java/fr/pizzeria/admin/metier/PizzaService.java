@@ -63,7 +63,7 @@ public class PizzaService implements Serializable{
 	
 	public void deletePizza(String codePizza) throws DaoException {
 		TypedQuery<Pizza> query = 
-				em.createQuery("delete p from Pizza p where p.code=:codePizza", Pizza.class)
+				em.createQuery("select p from Pizza p where p.code=:codePizza", Pizza.class)
 				.setParameter("codePizza", codePizza);
 		Pizza p = query.getResultList().get(0);
 		
