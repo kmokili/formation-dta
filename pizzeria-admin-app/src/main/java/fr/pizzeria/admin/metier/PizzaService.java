@@ -1,8 +1,12 @@
 package fr.pizzeria.admin.metier;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import javax.annotation.PostConstruct;
 import javax.ejb.Stateless;
 
 import javax.persistence.EntityManager;
@@ -12,6 +16,7 @@ import javax.persistence.TypedQuery;
 
 
 import fr.pizzeria.exception.DaoException;
+import fr.pizzeria.model.CategoriePizza;
 import fr.pizzeria.model.Pizza;
 
 @Stateless
@@ -70,4 +75,20 @@ public class PizzaService implements Serializable{
 		}
 	}
 	
+	@PostConstruct
+	public void init() {
+		Map<String, Pizza> pizzas = new HashMap<String, Pizza>();
+		pizzas.put("PEP", new Pizza("PEP", "Pépéroni", BigDecimal.valueOf(12.50), CategoriePizza.VIANDE, null));
+		pizzas.put("MAR", new Pizza("MAR", "Margherita", BigDecimal.valueOf(14.00),  CategoriePizza.SANS_VIANDE, null));
+		pizzas.put("REI", new Pizza("REI", "La Reine", BigDecimal.valueOf(11.50), CategoriePizza.VIANDE, null));
+		pizzas.put("FRO", new Pizza("FRO", "La 4 fromages", BigDecimal.valueOf(12.00),  CategoriePizza.SANS_VIANDE, null));
+		pizzas.put("CAN", new Pizza("CAN", "La cannibale", BigDecimal.valueOf(12.50), CategoriePizza.VIANDE, null));
+		pizzas.put("SAV", new Pizza("SAV", "La savoyarde", BigDecimal.valueOf(13.00), CategoriePizza.VIANDE, null));
+		pizzas.put("ORI", new Pizza("ORI", "L'orientale", BigDecimal.valueOf(13.50), CategoriePizza.VIANDE, null));
+		pizzas.put("IND", new Pizza("IND", "L'indienne", BigDecimal.valueOf(14.00), CategoriePizza.VIANDE, null));
+		pizzas.put("SAU", new Pizza("SAU", "La Saumonéta", BigDecimal.valueOf(14.00), CategoriePizza.POISSON, null));
+		
+		pizzas.values().forEach(p-> em.persist(p));
+		
+	}
 }
