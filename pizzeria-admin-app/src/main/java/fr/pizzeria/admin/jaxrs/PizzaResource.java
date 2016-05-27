@@ -4,9 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
-
+import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
@@ -26,22 +30,29 @@ public class PizzaResource {
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<Pizza> findAllPizzas() throws DaoException {
 		// pizze : pluriel de pizza (italien)
-		List<Pizza> pizze = new ArrayList<Pizza>();
-		return pizze;
+		return pizzaService.findAllPizzas();
+		 
 		
 	}
 	
+	@POST
+	@Consumes(MediaType.APPLICATION_JSON)
 	public void savePizza(Pizza newPizza) throws DaoException {
-		
+		pizzaService.savePizza(newPizza);
+//		return newPizza;
 	}
 	
-	
-	public void updatePizza(String codePizza, Pizza updatePizza) throws DaoException {
-		
+	@PUT
+	@Consumes(MediaType.APPLICATION_JSON)
+	public void updatePizza(Pizza updatePizza) throws DaoException {
+		pizzaService.updatePizza(updatePizza.getCode(), updatePizza);
+//		return updatePizza;
 	}
 	
-	public void deletePizza(String codePizza) throws DaoException {
-		
+	@DELETE
+	@Path("/{code}")
+	public void deletePizza(@PathParam("code") String codePizza) throws DaoException {
+		pizzaService.deletePizza(codePizza);
 	}
 	
 	

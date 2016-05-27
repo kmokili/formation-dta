@@ -49,7 +49,9 @@ public class PizzaService implements Serializable{
 	
 	public void updatePizza(String codePizza, Pizza updatePizza) throws DaoException {
 		TypedQuery<Pizza> query = 
-				em.createQuery("select p from Pizza p where p.code='codePizza'", Pizza.class);
+				em.createQuery("select p from Pizza p where p.code=:codePizza", Pizza.class)
+				.setParameter("codePizza", codePizza);
+		
 		Pizza p = query.getResultList().get(0);
 		
 		p.setCode(updatePizza.getCode());
@@ -61,7 +63,8 @@ public class PizzaService implements Serializable{
 	
 	public void deletePizza(String codePizza) throws DaoException {
 		TypedQuery<Pizza> query = 
-				em.createQuery("delete p from Pizza p where p.code='codePizza'", Pizza.class);
+				em.createQuery("select p from Pizza p where p.code=:codePizza", Pizza.class)
+				.setParameter("codePizza", codePizza);
 		Pizza p = query.getResultList().get(0);
 		
 		if (p != null) {
@@ -74,7 +77,7 @@ public class PizzaService implements Serializable{
 			savePizza(pizza);
 		}
 	}
-	
+	/*
 	@PostConstruct
 	public void init() {
 		Map<String, Pizza> pizzas = new HashMap<String, Pizza>();
@@ -91,4 +94,5 @@ public class PizzaService implements Serializable{
 		pizzas.values().forEach(p-> em.persist(p));
 		
 	}
+	*/
 }
