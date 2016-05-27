@@ -1,5 +1,6 @@
 package fr.pizzeria.dao;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -14,8 +15,12 @@ import fr.pizzeria.model.CategoriePizza;
 import fr.pizzeria.model.Pizza;
 
 
-public class PizzaDaoImpl implements IPizzaDao {
+public class PizzaDaoImpl implements IPizzaDao, Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Map<String, Pizza> pizzas = new HashMap<String, Pizza>();
 
 	public PizzaDaoImpl() {
@@ -62,7 +67,11 @@ public class PizzaDaoImpl implements IPizzaDao {
 
 	@Override
 	public void saveAllPizzas(List<Pizza> listPizzas, int nb) throws DaoException {
-		// TODO Auto-generated method stub
+		
+		for (Pizza pizza : listPizzas) {
+			savePizza(pizza);
+		}
+
 		
 	}
 

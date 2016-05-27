@@ -63,9 +63,9 @@
 				  <label class="col-md-4 control-label" for="categorie">Catégorie</label>
 				  <div class="col-md-4">
 				    <select id="categorie" name="categorie" class="form-control">
-				      <option <c:if test="${pizza.categorie.equals(CategoriePizza.VIANDE)}">selected</c:if> value="<c:out value="${CategoriePizza.VIANDE}"/>">Viande</option>
-				      <option <c:if test="${pizza.categorie.equals(CategoriePizza.SANS_VIANDE)}">selected</c:if> value="${CategoriePizza.SANS_VIANDE}">Sans viande</option>
-				      <option <c:if test="${pizza.categorie.equals(CategoriePizza.POISSON)}">selected</c:if> value="${CategoriePizza.POISSON}">Poisson</option>
+				      <option value="<c:out value="VIANDE"/>">Viande</option>
+				      <option value="SANS_VIANDE">Sans viande</option>
+				      <option value="POISSON">Poisson</option>
 				    </select>
 				  </div>
 				</div>

@@ -65,7 +65,9 @@ public class PizzaService implements Serializable{
 	}
 
 	public void saveAllPizzas(List<Pizza> listPizzas, int nb) throws DaoException {
-		
+		for(Pizza pizza : listPizzas) {
+			savePizza(pizza);
+		}
 	}
 	
 }
