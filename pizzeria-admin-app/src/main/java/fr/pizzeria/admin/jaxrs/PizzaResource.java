@@ -35,8 +35,9 @@ public class PizzaResource {
 	
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
-	public void savePizza(Pizza newPizza) throws DaoException {
+	public Pizza savePizza(Pizza newPizza) throws DaoException {
 		pizzaService.savePizza(newPizza);
+		return newPizza;
 	}
 	
 	@PUT
