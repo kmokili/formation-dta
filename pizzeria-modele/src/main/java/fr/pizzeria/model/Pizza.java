@@ -5,6 +5,7 @@ import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.StringJoiner;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -39,6 +40,15 @@ public class Pizza {
 	public Pizza() {
 		// constructeur par défaut
 	}
+	
+	public Pizza(String code, String nom, BigDecimal prix, 
+			CategoriePizza cat) {
+		this();
+		this.code = code;
+		this.nom = nom;
+		this.prix = prix;
+		this.categorie = cat;
+	}
 
 	public Pizza(String code, String nom, BigDecimal prix, 
 			CategoriePizza cat, String url_image) {
@@ -50,11 +60,11 @@ public class Pizza {
 		this.url_image = url_image;
 	}
 
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
@@ -155,6 +165,15 @@ public class Pizza {
 			       append(nom).
 			       toHashCode();
 	}
+	
+	public String toJson() {
+		StringBuilder sb = new StringBuilder("{");
+		sb.append("\"nom\" : \"").append(this.getNom()).append("\"")
+		.append("\"code\" : \"").append(this.getCode());
+		return sb.toString();
+	}
+	
+	
 	
 	
 	@Override
