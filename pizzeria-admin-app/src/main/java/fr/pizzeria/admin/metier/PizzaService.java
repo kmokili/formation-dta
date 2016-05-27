@@ -74,7 +74,7 @@ public class PizzaService implements Serializable{
 			savePizza(pizza);
 		}
 	}
-	
+	/*
 	@PostConstruct
 	public void init() {
 		Map<String, Pizza> pizzas = new HashMap<String, Pizza>();
@@ -91,4 +91,5 @@ public class PizzaService implements Serializable{
 		pizzas.values().forEach(p-> em.persist(p));
 		
 	}
+	*/
 }
