@@ -36,17 +36,17 @@ public class PizzaResource {
 	}
 	
 	@POST
-	@Produces(MediaType.APPLICATION_JSON)
-	public Pizza savePizza(Pizza newPizza) throws DaoException {
+	@Consumes(MediaType.APPLICATION_JSON)
+	public void savePizza(Pizza newPizza) throws DaoException {
 		pizzaService.savePizza(newPizza);
-		return newPizza;
+//		return newPizza;
 	}
 	
 	@PUT
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Pizza updatePizza(String codePizza, Pizza updatePizza) throws DaoException {
-		pizzaService.updatePizza(codePizza, updatePizza);
-		return updatePizza;
+	public void updatePizza(Pizza updatePizza) throws DaoException {
+		pizzaService.updatePizza(updatePizza.getCode(), updatePizza);
+//		return updatePizza;
 	}
 	
 	@DELETE
