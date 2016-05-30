@@ -61,6 +61,12 @@ public class PizzaAdminApp {
 			EntityManagerFactory emf = Persistence.createEntityManagerFactory("pizzeria-console-objet-java8");			
 			lancerApplication(new PizzaDaoJpa(emf));
 			break;
+		case 4:
+			System.out.println("DAO JAX-RS");
+//			java.util.logging.Logger.getLogger("org.hibernate").setLevel(Level.SEVERE);
+//			EntityManagerFactory emf = Persistence.createEntityManagerFactory("pizzeria-console-objet-java8");			
+//			lancerApplication(new PizzaDaoJpa(emf));
+			break;
 		default:
 			System.err.println("Aucune configuration Dao trouvée. Le fichier application.properties est-il vraiment configuré ?");
 			break;
