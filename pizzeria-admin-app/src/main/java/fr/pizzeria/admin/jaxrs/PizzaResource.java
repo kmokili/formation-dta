@@ -13,6 +13,8 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.ResponseBuilder;
 
 import fr.pizzeria.admin.metier.PizzaService;
 import fr.pizzeria.exception.DaoException;
@@ -29,10 +31,11 @@ public class PizzaResource {
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<Pizza> findAllPizzas() throws DaoException {
-		// pizze : pluriel de pizza (italien)
+		ResponseBuilder respBuilder = Response.ok();
+		respBuilder.entity(pizzaService.findAllPizzas());
+		respBuilder.header("Access-Control-Allow-Origin", "http://localhost");
 		return pizzaService.findAllPizzas();
-		 
-		
+
 	}
 	
 	@POST
