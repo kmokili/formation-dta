@@ -30,11 +30,11 @@ public class PizzaResource {
 
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response findAllPizzas() throws DaoException {
+	public List<Pizza> findAllPizzas() throws DaoException {
 		ResponseBuilder respBuilder = Response.ok();
 		respBuilder.entity(pizzaService.findAllPizzas());
 		respBuilder.header("Access-Control-Allow-Origin", "http://localhost");
-		return respBuilder.build();
+		return pizzaService.findAllPizzas();
 
 	}
 	
