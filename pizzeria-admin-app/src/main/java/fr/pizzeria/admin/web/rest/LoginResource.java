@@ -27,7 +27,7 @@ public class LoginResource {
 			
 			// Génération token unique
 			String token = tokenService.generateNewToken();
-			resp = Response.ok(token.toString()).build();
+			resp = Response.ok(token).build();
 			
 		} else {
 			// Cas KO

@@ -25,7 +25,7 @@ public class LoginFilter implements Filter {
 	@Override
 	public void init(FilterConfig filterConfig) throws ServletException {
 		this.config = config;
-		config.getServletContext().log("LoginFilter initialized");
+		//config.getServletContext().log("LoginFilter initialized");
 
 	}
 
