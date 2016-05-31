@@ -10,6 +10,8 @@ import java.util.logging.Logger;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
 import fr.pizzeria.dao.IPizzaDao;
 import fr.pizzeria.dao.PizzaDaoFichierImpl;
 import fr.pizzeria.dao.PizzaDaoImpl;
@@ -24,63 +26,34 @@ public class PizzaAdminApp {
 	private static final Logger LOG = Logger.getLogger("PizzaAdminApp");
 	
 
-
 	private PizzaAdminApp() {
 		
 	}
 	
+	
+	/**
+	 * 
+	 * @param args
+	 * @throws IOException
+	 * @throws DaoException
+	 */
 	public static void main(String[] args) throws IOException, DaoException {
-		LOG.log(Level.INFO, "Démarrage de l'application");
-		
-		ResourceBundle bundle = ResourceBundle.getBundle("application");
-		String confString = bundle.getString("dao.impl");
-		Integer daoImplConf = Integer.valueOf(confString);
-		
-		switch (daoImplConf) {
-		case 0:
-			System.out.println("DAO mémoire");
-			lancerApplication(new PizzaDaoImpl());
-			break;
-		case 1:
-			System.out.println("DAO fichiers");
-			lancerApplication(new PizzaDaoFichierImpl());
-			break;
-		case 2:
-			System.out.println("DAO Jdbc");
-			ResourceBundle jdbcBundle = ResourceBundle.getBundle("jdbc");
-			String driver = jdbcBundle.getString("jdbc.driver");
-			String url = jdbcBundle.getString("jdbc.url");
-			String user = jdbcBundle.getString("jdbc.user");
-			String pass = jdbcBundle.getString("jdbc.pass");
-			
-			lancerApplication(new PizzaDaoJDBC(driver,url,user,pass));
-			break;
-		case 3:
-			System.out.println("DAO JPA");
-//			java.util.logging.Logger.getLogger("org.hibernate").setLevel(Level.SEVERE);
-			EntityManagerFactory emf = Persistence.createEntityManagerFactory("pizzeria-console-objet-java8");			
-			lancerApplication(new PizzaDaoJpa(emf));
-			break;
-		case 4:
-			System.out.println("DAO JAX-RS");
-//			java.util.logging.Logger.getLogger("org.hibernate").setLevel(Level.SEVERE);
-//			EntityManagerFactory emf = Persistence.createEntityManagerFactory("pizzeria-console-objet-java8");			
-//			lancerApplication(new PizzaDaoJpa(emf));
-			break;
-		default:
-			System.err.println("Aucune configuration Dao trouvée. Le fichier application.properties est-il vraiment configuré ?");
-			break;
+		try(ClassPathXmlApplicationContext context 
+				= new ClassPathXmlApplicationContext("application-config.xml","dao-memoire-config.xml")) {
+			Menu menu = context.getBean(Menu.class);
+			IPizzaDao pizzaDao = context.getBean(PizzaDaoImpl.class);
+			menu.afficher();
 		}
 	}
 
 	
 		
-	private static void lancerApplication(IPizzaDao dao){
-		try(Scanner sc = new Scanner(System.in)) {
-			Menu menu = new Menu(sc,dao);
-			menu.afficher();
-		}
-		
-	}
+//	private static void lancerApplication(IPizzaDao dao){
+//		try(Scanner sc = new Scanner(System.in)) {
+//			Menu menu = new Menu(sc,dao);
+//			menu.afficher();
+//		}
+//		
+//	}
 
 }
