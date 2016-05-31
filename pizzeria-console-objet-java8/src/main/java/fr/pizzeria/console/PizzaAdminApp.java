@@ -32,7 +32,7 @@ public class PizzaAdminApp {
 	
 	
 	/**
-	 * 
+	 * Point d'entrée de l'application.
 	 * @param args
 	 * @throws IOException
 	 * @throws DaoException
@@ -43,7 +43,6 @@ public class PizzaAdminApp {
 		
 		try(ClassPathXmlApplicationContext context 
 				= new ClassPathXmlApplicationContext(fichierConfDao, "application-config.xml")) {
-//			Menu menu = context.getBean(Menu.class);
 			Menu menu = context.getBean(Menu.class);
 			menu.afficher();
 		}
