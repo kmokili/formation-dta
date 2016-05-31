@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+	<bean id="pizzaDao" class="fr.pizzeria.dao.PizzaDaoJDBC">
+		<constructor-arg value="${jdbc.driver}"></constructor-arg>
+	<constructor-arg value="${jdbc.url}"></constructor-arg>
+	<constructor-arg value="${jdbc.user}"></constructor-arg>
+	<constructor-arg value="${jdbc.pass}"></constructor-arg>
+	
+		
+	</bean>
+
+</beans>

@@ -1,6 +1,5 @@
 package fr.pizzeria.dao;
 
-import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -13,9 +12,7 @@ import java.util.List;
 import java.util.Map;
 
 import fr.pizzeria.exception.DaoException;
-import fr.pizzeria.exception.DeletePizzaException;
-import fr.pizzeria.exception.SavePizzaException;
-import fr.pizzeria.exception.UpdatePizzaException;
+
 import fr.pizzeria.model.CategoriePizza;
 import fr.pizzeria.model.Pizza;
 
@@ -29,6 +26,8 @@ public class PizzaDaoJDBC implements IPizzaDao {
 	private String user;
 	private String pass;
 	
+	
+
 	public PizzaDaoJDBC(String driver, String url2, String user2, String pass2)  throws DaoException{
 		try {
 			Class.forName(driver);
@@ -104,7 +103,6 @@ public class PizzaDaoJDBC implements IPizzaDao {
 			connection.close();
 			
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			System.err.println("Pas de statement créé");
 			e.printStackTrace();
 		}
@@ -127,7 +125,6 @@ public class PizzaDaoJDBC implements IPizzaDao {
 			connection.close();
 			
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			System.err.println("Pas de statement créé");
 			e.printStackTrace();
 		}
@@ -146,7 +143,6 @@ public class PizzaDaoJDBC implements IPizzaDao {
 			connection.close();
 			
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			System.err.println("Pas de statement créé");
 			e.printStackTrace();
 		}

@@ -54,7 +54,7 @@ public class PizzaDaoImpl implements IPizzaDao, Serializable{
 		if(!pizzas.containsKey(codePizza)) {
 			throw new UpdatePizzaException("code pizza non trouvé");
 		}
-		pizzas.put(codePizza, updatePizza);
+		pizzas.put(updatePizza.getCode(), updatePizza);
 	}
 
 	@Override

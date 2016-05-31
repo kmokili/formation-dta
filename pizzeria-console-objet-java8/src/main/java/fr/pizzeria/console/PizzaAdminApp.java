@@ -38,10 +38,13 @@ public class PizzaAdminApp {
 	 * @throws DaoException
 	 */
 	public static void main(String[] args) throws IOException, DaoException {
+		
+		String fichierConfDao = ResourceBundle.getBundle("application").getString("dao.impl");
+		
 		try(ClassPathXmlApplicationContext context 
-				= new ClassPathXmlApplicationContext("application-config.xml","dao-memoire-config.xml")) {
+				= new ClassPathXmlApplicationContext(fichierConfDao, "application-config.xml")) {
+//			Menu menu = context.getBean(Menu.class);
 			Menu menu = context.getBean(Menu.class);
-			IPizzaDao pizzaDao = context.getBean(PizzaDaoImpl.class);
 			menu.afficher();
 		}
 	}
