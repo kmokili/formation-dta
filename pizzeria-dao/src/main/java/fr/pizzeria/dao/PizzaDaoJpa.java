@@ -10,10 +10,12 @@ import javax.persistence.EntityTransaction;
 import javax.persistence.TypedQuery;
 
 import org.apache.commons.collections4.ListUtils;
+import org.springframework.stereotype.Component;
 
 import fr.pizzeria.exception.DaoException;
 import fr.pizzeria.model.Pizza;
 
+@Component
 public class PizzaDaoJpa implements IPizzaDao {
 	
 	private EntityManagerFactory emFactory;
