@@ -5,11 +5,9 @@
 	
 	<bean id="pizzaDao" class="fr.pizzeria.dao.PizzaDaoJDBC">
 		<constructor-arg value="${jdbc.driver}"></constructor-arg>
-	<constructor-arg value="${jdbc.url}"></constructor-arg>
-	<constructor-arg value="${jdbc.user}"></constructor-arg>
-	<constructor-arg value="${jdbc.pass}"></constructor-arg>
-	
-		
+		<constructor-arg value="${jdbc.url}"></constructor-arg>
+		<constructor-arg value="${jdbc.user}"></constructor-arg>
+		<constructor-arg value="${jdbc.pass}"></constructor-arg>	
 	</bean>
 
 </beans>
