@@ -1,11 +1,13 @@
 package fr.pizzeria.ihm.menu.option;
 
+import java.util.Arrays;
 import java.util.Scanner;
 
 import fr.pizzeria.dao.IPizzaDao;
 import fr.pizzeria.exception.DaoException;
 import fr.pizzeria.exception.SavePizzaException;
 import fr.pizzeria.exception.UpdatePizzaException;
+import fr.pizzeria.model.CategoriePizza;
 import fr.pizzeria.model.DesactiverOptionMenu;
 import fr.pizzeria.model.Pizza;
 
@@ -34,6 +36,18 @@ public class MettreAJourPizzaOptionMenu extends AbstractOptionMenu {
 		updatePizza.setPrix(sc.nextBigDecimal());
 	
 		try {
+						
+			System.out.println("Veuillez saisir la catégorie");
+			
+			CategoriePizza[] categoriePizzas = CategoriePizza.values();
+
+			
+			Arrays.asList(categoriePizzas).forEach(cat -> System.out.println(cat.ordinal() + " -> " + cat.getLibelle()));
+			
+			int saisieCategorie = sc.nextInt();
+			updatePizza.setCategorie(categoriePizzas[saisieCategorie]);
+			
+			
 			pizzaDao.updatePizza(codePizza, updatePizza);
 			System.out.println("Pizza mise à jour");
 		} catch (DaoException e) {

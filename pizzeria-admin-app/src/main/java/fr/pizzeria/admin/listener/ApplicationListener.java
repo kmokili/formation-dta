@@ -3,6 +3,8 @@ package fr.pizzeria.admin.listener;
 import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
@@ -25,7 +27,8 @@ import fr.pizzeria.model.Pizza;
  */
 @WebListener
 public class ApplicationListener implements ServletContextListener {
-//	@PersistenceContext(unitName="pizza-db") private EntityManager em;
+	
+	private static final Logger LOG = Logger.getLogger(ApplicationListener.class.getName());
 	@Inject private PizzaService pizzaService;
    
 
@@ -59,8 +62,7 @@ public class ApplicationListener implements ServletContextListener {
 			try {
 				pizzaService.savePizza(p);
 			} catch (DaoException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				LOG.log(Level.SEVERE, "Impossible d'insérer une pizza", e);
 			}
 		});
 		

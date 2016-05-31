@@ -15,6 +15,9 @@ import org.apache.commons.lang3.StringUtils;
 @WebServlet("/login")
 public class LoginController extends HttpServlet {
 
+	
+
+
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		RequestDispatcher rd = this.getServletContext().getRequestDispatcher("/WEB-INF/views/login/login.jsp");

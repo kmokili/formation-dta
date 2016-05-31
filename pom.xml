@@ -106,7 +106,25 @@
 		    <version>${javaee-api.version}</version>
 		    <scope>provided</scope>
 		</dependency>
-		
+		<dependency>
+			<groupId>org.glassfish.jersey.core</groupId>
+			<artifactId>jersey-client</artifactId>
+			<version>2.23</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.glassfish.jersey.media</groupId>
+			<artifactId>jersey-media-json-jackson</artifactId>
+			<version>2.22</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-framework-bom</artifactId>
+			<version>4.2.6.RELEASE</version>
+			<type>pom</type>
+			<scope>import</scope>
+		</dependency>
   	</dependencies>
   </dependencyManagement>
   

@@ -1,6 +1,6 @@
 package fr.pizzeria.admin.jaxrs;
 
-import java.util.ArrayList;
+
 import java.util.List;
 
 import javax.inject.Inject;

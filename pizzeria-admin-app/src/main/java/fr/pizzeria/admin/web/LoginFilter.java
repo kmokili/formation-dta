@@ -8,7 +8,11 @@ import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
+import javax.servlet.annotation.WebFilter;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
+@WebFilter("/*")
 public class LoginFilter implements Filter {
 
 	private FilterConfig config = null;
@@ -21,14 +25,24 @@ public class LoginFilter implements Filter {
 	@Override
 	public void init(FilterConfig filterConfig) throws ServletException {
 		this.config = config;
-		config.getServletContext().log("LoginFilter initialized");
+		//config.getServletContext().log("LoginFilter initialized");
 
 	}
 
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
-		// TODO Auto-generated method stub
+		HttpServletRequest httpRequest = (HttpServletRequest) request;
+		HttpServletResponse httpResponse = (HttpServletResponse) response;
+		String emailAuthentifie = (String) httpRequest.getSession(true).getAttribute("email");
+		
+		if (!httpRequest.getRequestURI().contains("/pizzeria") && !httpRequest.getRequestURI().contains("login") 
+				&& emailAuthentifie.equals(null)) 
+		{
+			httpResponse.sendRedirect(httpRequest.getServletContext().getContextPath() + "/login");
+		} else {
+			chain.doFilter(request, response);
+		}
 
 	}
 

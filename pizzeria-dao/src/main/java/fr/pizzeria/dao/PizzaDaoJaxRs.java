@@ -2,10 +2,14 @@ package fr.pizzeria.dao;
 
 import java.util.List;
 
+//import com.sun.jersey.api.client.Client;
+
 import fr.pizzeria.exception.DaoException;
 import fr.pizzeria.model.Pizza;
 
 public class PizzaDaoJaxRs implements IPizzaDao {
+	
+//	Client client = ClientBuilder.newClient().register(JacksonFeature.class);
 
 	public PizzaDaoJaxRs() {
 		// TODO Auto-generated constructor stub
