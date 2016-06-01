@@ -11,14 +11,17 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.springframework.stereotype.Component;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Lazy;
+import org.springframework.stereotype.Repository;
 
 import fr.pizzeria.exception.DaoException;
 
 import fr.pizzeria.model.CategoriePizza;
 import fr.pizzeria.model.Pizza;
 
-@Component
+//@Repository
+//@Lazy
 public class PizzaDaoJDBC implements IPizzaDao {
 	
 
@@ -28,7 +31,9 @@ public class PizzaDaoJDBC implements IPizzaDao {
 	private String user;
 	private String pass;
 	
-	
+	public PizzaDaoJDBC() {
+		
+	}
 
 	public PizzaDaoJDBC(String driver, String url2, String user2, String pass2)  throws DaoException{
 		try {
@@ -157,5 +162,31 @@ public class PizzaDaoJDBC implements IPizzaDao {
 		// TODO Auto-generated method stub
 		
 	}
+	
+	public String getUrl() {
+		return url;
+	}
 
+	@Value("${jdbc.url}")
+	public void setUrl(String url) {
+		this.url = url;
+	}
+
+	public String getUser() {
+		return user;
+	}
+
+	@Value("${jdbc.user}")
+	public void setUser(String user) {
+		this.user = user;
+	}
+
+	public String getPass() {
+		return pass;
+	}
+
+	@Value("${jdbc.pass}")
+	public void setPass(String pass) {
+		this.pass = pass;
+	}
 }

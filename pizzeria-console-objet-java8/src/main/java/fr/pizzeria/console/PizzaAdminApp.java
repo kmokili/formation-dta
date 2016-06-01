@@ -10,6 +10,7 @@ import java.util.logging.Logger;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import fr.pizzeria.dao.IPizzaDao;
@@ -38,24 +39,13 @@ public class PizzaAdminApp {
 	 * @throws DaoException
 	 */
 	public static void main(String[] args) throws IOException, DaoException {
+		Logger.getLogger("org").setLevel(Level.SEVERE);
 		
-		String fichierConfDao = ResourceBundle.getBundle("application").getString("dao.impl");
-		
-		try(ClassPathXmlApplicationContext context 
-				= new ClassPathXmlApplicationContext(fichierConfDao, "application-config.xml")) {
+		try(AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(PizzeriaAppSpringConfig.class)) {
 			Menu menu = context.getBean(Menu.class);
 			menu.afficher();
 		}
 	}
 
-	
-		
-//	private static void lancerApplication(IPizzaDao dao){
-//		try(Scanner sc = new Scanner(System.in)) {
-//			Menu menu = new Menu(sc,dao);
-//			menu.afficher();
-//		}
-//		
-//	}
 
 }

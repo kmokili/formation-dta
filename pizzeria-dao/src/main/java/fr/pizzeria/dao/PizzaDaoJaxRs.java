@@ -2,14 +2,16 @@ package fr.pizzeria.dao;
 
 import java.util.List;
 
-import org.springframework.stereotype.Component;
+import org.springframework.context.annotation.Lazy;
+import org.springframework.stereotype.Repository;
 
 //import com.sun.jersey.api.client.Client;
 
 import fr.pizzeria.exception.DaoException;
 import fr.pizzeria.model.Pizza;
 
-@Component
+//@Repository
+@Lazy
 public class PizzaDaoJaxRs implements IPizzaDao {
 	
 //	Client client = ClientBuilder.newClient().register(JacksonFeature.class);

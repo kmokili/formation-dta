@@ -1,6 +1,6 @@
 package fr.pizzeria.dao;
 
-import java.util.ArrayList;
+
 import java.util.Comparator;
 import java.util.List;
 
@@ -11,12 +11,14 @@ import javax.persistence.TypedQuery;
 
 import org.apache.commons.collections4.ListUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.context.annotation.Lazy;
+import org.springframework.stereotype.Repository;
 
 import fr.pizzeria.exception.DaoException;
 import fr.pizzeria.model.Pizza;
 
-@Component
+//@Repository
+//@Lazy
 public class PizzaDaoJpa implements IPizzaDao {
 	
 	@Autowired

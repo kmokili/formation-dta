@@ -4,6 +4,7 @@ import java.util.Map;
 import java.util.Scanner;
 import java.util.TreeMap;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import fr.pizzeria.dao.IPizzaDao;
@@ -23,6 +24,7 @@ public class Menu {
 	private Map<Integer, AbstractOptionMenu> options = new TreeMap<Integer, AbstractOptionMenu>();
 	private Scanner sc;
 
+	@Autowired
 	public Menu(Scanner sc, IPizzaDao pizzaDao) {
 		super();
 		initialiserOptions(sc, pizzaDao);

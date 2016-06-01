@@ -5,9 +5,11 @@ import java.util.Scanner;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
+import org.springframework.beans.factory.config.PropertyPlaceholderConfigurer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.io.ClassPathResource;
 
 import fr.pizzeria.dao.IPizzaDao;
 import fr.pizzeria.dao.PizzaDaoImpl;
@@ -19,31 +21,38 @@ import fr.pizzeria.exception.DaoException;
 @ComponentScan("fr.pizzeria")
 public class PizzeriaAppSpringConfig {
 
-	private IPizzaDao pizzaDao;
-	
+		
 	@Bean
 	public Scanner scanner() {
 		return new Scanner(System.in);
 	}
 
-	@Bean
-	public EntityManagerFactory entityManagerFactory() {
-		 return Persistence.createEntityManagerFactory("pizzeria-dao");	
-	}
+//	@Bean
+//	public EntityManagerFactory entityManagerFactory() {
+//		 return Persistence.createEntityManagerFactory("pizzeria-console-objet-java8");	
+//	}
+	
+//	@Bean
+//	public IPizzaDao pizzaDaoJpa(EntityManagerFactory emf) {
+//		return new PizzaDaoJpa(emf);	
+//	}
+	
+//	@Bean
+//	public IPizzaDao pizzaDaoImpl() {
+//		return new PizzaDaoImpl();	
+//	}
 	
 	@Bean
-	public PizzaDaoJpa pizzaDaoJpa(EntityManagerFactory emf) {
-		return new PizzaDaoJpa(emf);	
+	public PropertyPlaceholderConfigurer props(){
+		PropertyPlaceholderConfigurer co = new PropertyPlaceholderConfigurer();
+		co.setLocation(new ClassPathResource("jdbc.properties"));
+		return co;
 	}
 	
-	@Bean
-	public PizzaDaoImpl pizzaDaoImpl() {
-		return new PizzaDaoImpl();	
-	}
 	
 	@Bean
-	public PizzaDaoJDBC pizzaDaoJDBC() throws DaoException {
-		return new PizzaDaoJDBC(null, null, null, null);	
+	public IPizzaDao pizzaDaoJDBC() throws DaoException {
+		return new PizzaDaoJDBC();	
 	}
 	
 	
