@@ -14,8 +14,7 @@
 		</constructor-arg>
 	</bean>
 
-	<bean
-		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+	<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
 		<property name="location" value="jdbc.properties" />
 	</bean>
 
