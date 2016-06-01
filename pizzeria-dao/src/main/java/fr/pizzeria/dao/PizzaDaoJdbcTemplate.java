@@ -5,46 +5,62 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Consumer;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.sql.DataSource;
 
+import org.apache.commons.collections4.ListUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
+import fr.pizzeria.dao.pizza.BatchInsertPizza;
 import fr.pizzeria.exception.DaoException;
+import fr.pizzeria.model.CategoriePizza;
 import fr.pizzeria.model.Pizza;
 
 @Repository
 @Lazy
+@Transactional
 public class PizzaDaoJdbcTemplate implements IPizzaDao {
 	
+	private static final Logger LOG = Logger.getLogger(PizzaDaoJdbcTemplate.class.toString());
 
-	private Map<String, Pizza> pizzas = new HashMap<String, Pizza>();
+	
+
 	private String url;
 	private String user;
 	private String pass;
-	private JdbcTemplate jdbcTemplate; 
-	
-	public PizzaDaoJdbcTemplate() {
-		
-	}
+	private JdbcTemplate jdbcTemplate;
+//	private PlatformTransactionManager txManager;
+	@Autowired private BatchInsertPizza batchInsertPizza; 
 
+
+	@Autowired
 	public PizzaDaoJdbcTemplate(DataSource datasource)  throws DaoException{
 		this.jdbcTemplate = new JdbcTemplate(datasource);
+		LOG.log(Level.INFO, "Fonctionnement de PizzaDaoJdbcTemplate");
 	}
 
-		
-	
-	private Connection connexion() throws SQLException {
-		return DriverManager.getConnection(url,user,pass);
-	}
-	
+//		
+//	
+//	private Connection connexion() throws SQLException {
+//		return DriverManager.getConnection(url,user,pass);
+//	}
+//	
 	
 	
 	
@@ -55,30 +71,34 @@ public class PizzaDaoJdbcTemplate implements IPizzaDao {
 		
 		return this.jdbcTemplate.query(sql, (ResultSet rs, int rowNum) -> {
 			Pizza p = new Pizza();
-			p.setId(rs.getInt("id"));
+			p.setCode(rs.getString("code"));
 			p.setNom(rs.getString("nom"));
+			p.setPrix(rs.getBigDecimal("prix"));
+			p.setCategorie(CategoriePizza.valueOf(rs.getString("categorie")));
 			return p;
 		});
 	}
 
 	@Override
-	public void savePizza(Pizza newPizza) throws DaoException {
+	public void savePizza(Pizza newPizza) {
 		String sql = "INSERT INTO `pizza` (`categorie`, `code`, `nom`, `prix`) VALUES(?,?,?,?)";
 		this.jdbcTemplate.update(sql, newPizza.getCategorie(), newPizza.getCode(), newPizza.getNom(), newPizza.getPrix());
 		
 	}
 
 	@Override
-	public void updatePizza(String codePizza, Pizza updatePizza) throws DaoException {
-		String sql = "update `pizza` set `nom` = ? where code = ?)";
-		this.jdbcTemplate.update(sql, updatePizza.getNom(), updatePizza.getCode());
+	public void updatePizza(String codePizza, Pizza updatePizza) {
+		String sql = "update `pizza` set code = ?, nom = ?, prix = ?, categorie = ?, url_image = ?)";
+		this.jdbcTemplate.update(sql, updatePizza.getCode(), updatePizza.getNom(), updatePizza.getPrix(),
+				updatePizza.getCategorie(), updatePizza.getUrl_image());
 		
 	}
 	
 
 	public void updatePizza(Pizza updatePizza) {
-		String sql = "update `pizza` set `nom` = ? where code = ?)";
-		this.jdbcTemplate.update(sql, updatePizza.getNom(), updatePizza.getCode());
+		String sql = "update `pizza` set code = ?, nom = ?, prix = ?, categorie = ?, url_image = ?)";
+		this.jdbcTemplate.update(sql, updatePizza.getCode(), updatePizza.getNom(), updatePizza.getPrix(),
+				updatePizza.getCategorie(), updatePizza.getUrl_image());
 	}
 
 	@Override
@@ -90,10 +110,16 @@ public class PizzaDaoJdbcTemplate implements IPizzaDao {
 
 
 	@Override
+	@Transactional
 	public void saveAllPizzas(List<Pizza> listPizzas, int nb) throws DaoException {
-		// TODO Auto-generated method stub
-		
+		listPizzas.sort(Comparator.comparing(Pizza::getCode));
+		List<List<Pizza>> listPartitionnee = ListUtils.partition(listPizzas, nb);
+		listPartitionnee.forEach(batchInsertPizza::insertPizza);
 	}
+	
+	
+	
+	
 	
 	public String getUrl() {
 		return url;
