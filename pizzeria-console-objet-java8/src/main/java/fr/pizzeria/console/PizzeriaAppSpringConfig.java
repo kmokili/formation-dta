@@ -12,20 +12,19 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ClassPathResource;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
+import org.springframework.orm.jpa.JpaTransactionManager;
+import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
+import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
-import fr.pizzeria.dao.IPizzaDao;
-import fr.pizzeria.dao.PizzaDaoImpl;
-import fr.pizzeria.dao.PizzaDaoJDBC;
-import fr.pizzeria.dao.PizzaDaoJpa;
-import fr.pizzeria.exception.DaoException;
-
 @Configuration
-@ComponentScan("fr.pizzeria")
+@ComponentScan("fr.pizzeria.dao")
 @EnableTransactionManagement
+@EnableJpaRepositories("fr.pizzeria.dao.repository")
 public class PizzeriaAppSpringConfig {
 
 		
@@ -34,10 +33,10 @@ public class PizzeriaAppSpringConfig {
 		return new Scanner(System.in);
 	}
 
-//	@Bean
-//	public EntityManagerFactory entityManagerFactory() {
-//		 return Persistence.createEntityManagerFactory("pizzeria-console-objet-java8");	
-//	}
+	@Bean
+	public EntityManagerFactory entityManagerFactory() {
+		 return Persistence.createEntityManagerFactory("pizzeria-console-objet-java8");	
+	}
 	
 //	@Bean
 //	public IPizzaDao pizzaDaoJpa(EntityManagerFactory emf) {
@@ -66,10 +65,30 @@ public class PizzeriaAppSpringConfig {
 	public DataSource dataSource(@Value("${jdbc.url}") String url, @Value("${jdbc.user}") String user, @Value("${jdbc.pass}") String motDePasse){
 		return new DriverManagerDataSource(url, user, motDePasse);
 	}
-	
+	/*
 	@Bean
 	public PlatformTransactionManager txManager(DataSource dataSource) {
 		return new DataSourceTransactionManager(dataSource);
 	}
+	*/
+	@Bean
+	public PlatformTransactionManager transactionManager() {
+		JpaTransactionManager txManager = new JpaTransactionManager();
+		txManager.setEntityManagerFactory(entityManagerFactory());
+		return txManager;
+	}
 	
+	/*
+	@Bean
+	public EntityManagerFactory entityManagerFactory() {
+		HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
+		vendorAdapter.setGenerateDdl(true);
+		LocalContainerEntityManagerFactoryBean factory = new LocalContainerEntityManagerFactoryBean();
+		factory.setJpaVendorAdapter(vendorAdapter);
+		factory.setPackagesToScan("fr.pizzeria");
+		factory.setDataSource(dataSource());
+		factory.afterPropertiesSet();
+		return factory.getObject();
+	}
+	*/
 }
