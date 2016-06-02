@@ -12,7 +12,7 @@ import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
-@ComponentScan("fr.pizzeria")
+@ComponentScan("fr.pizzeria.dao")
 @EnableTransactionManagement
 public class SpringConfig {
 	

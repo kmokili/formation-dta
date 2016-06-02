@@ -1,15 +1,8 @@
 package fr.pizzeria.dao;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.Comparator;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.function.Consumer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -18,13 +11,10 @@ import javax.sql.DataSource;
 import org.apache.commons.collections4.ListUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Lazy;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.PlatformTransactionManager;
-import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import fr.pizzeria.dao.pizza.BatchInsertPizza;
@@ -81,8 +71,8 @@ public class PizzaDaoJdbcTemplate implements IPizzaDao {
 
 	@Override
 	public void savePizza(Pizza newPizza) {
-		String sql = "INSERT INTO `pizza` (`categorie`, `code`, `nom`, `prix`) VALUES(?,?,?,?)";
-		this.jdbcTemplate.update(sql, newPizza.getCategorie(), newPizza.getCode(), newPizza.getNom(), newPizza.getPrix());
+		String sql = "INSERT INTO `pizza` (`categorie`, `code`, `nom`, `prix`, `url_image`) VALUES(?,?,?,?,?)";
+		this.jdbcTemplate.update(sql, newPizza.getCategorie().name(), newPizza.getCode(), newPizza.getNom(), newPizza.getPrix(), newPizza.getUrl_image());
 		
 	}
 
@@ -96,14 +86,14 @@ public class PizzaDaoJdbcTemplate implements IPizzaDao {
 	
 
 	public void updatePizza(Pizza updatePizza) {
-		String sql = "update `pizza` set code = ?, nom = ?, prix = ?, categorie = ?, url_image = ?)";
+		String sql = "update pizza set code = ?, nom = ?, prix = ?, categorie = ?, url_image = ?";
 		this.jdbcTemplate.update(sql, updatePizza.getCode(), updatePizza.getNom(), updatePizza.getPrix(),
 				updatePizza.getCategorie(), updatePizza.getUrl_image());
 	}
 
 	@Override
 	public void deletePizza(String codePizza) throws DaoException {
-		String sql = "DELETE FROM `pizza` where code = ?)";
+		String sql = "DELETE FROM pizza where code = ?";
 		this.jdbcTemplate.update(sql, codePizza);
 	}
 
@@ -151,5 +141,15 @@ public class PizzaDaoJdbcTemplate implements IPizzaDao {
 	public Integer countPizzas() {
 		String sql = "SELECT COUNT(*) FROM PIZZA";
 		return this.jdbcTemplate.queryForObject(sql, Integer.class);
+	}
+
+	@Override
+	public Pizza findOnePizza(String code) throws DaoException {
+		 try {
+	            return this.jdbcTemplate.queryForObject("select * from pizza where code=?", (rs, rowNum) -> new Pizza(rs.getString("code"), rs.getString("nom"), rs.getBigDecimal("prix"), CategoriePizza.valueOf(rs
+	                    .getString("categorie"))), code);
+	        } catch (EmptyResultDataAccessException e) {
+	            return null;
+	        }
 	}
 }

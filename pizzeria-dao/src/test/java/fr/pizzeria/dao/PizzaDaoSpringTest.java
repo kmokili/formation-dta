@@ -8,12 +8,12 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
 
-@Configuration
-@ComponentScan("fr.pizzeria")
+//@Configuration
+//@ComponentScan("fr.pizzeria")
 public class PizzaDaoSpringTest {
 	
 	@Bean
 	public DataSource dadaSource() {
-		return new EmbeddedDatabaseBuilder().setType(EmbeddedDatabaseType.H2).addScript("db-schema.sql").addScript("db-data.sql").build();
+		return new EmbeddedDatabaseBuilder().setType(EmbeddedDatabaseType.H2).addScript("db-schema.sql").build();
 	}
 }
