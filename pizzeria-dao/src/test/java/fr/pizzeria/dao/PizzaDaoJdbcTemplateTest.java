@@ -1,32 +1,16 @@
 package fr.pizzeria.dao;
 
-import java.util.List;
-
-import org.junit.Assert;
-import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.beans.factory.annotation.Qualifier;
 
-import fr.pizzeria.exception.DaoException;
-import fr.pizzeria.model.Pizza;
+import fr.pizzeria.dao.IPizzaDao;
+import org.springframework.test.annotation.DirtiesContext;
 
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes=PizzaDaoSpringTest.class)
-public class PizzaDaoJdbcTemplateTest {
+public class PizzaDaoJdbcTemplateTest extends PizzaDaoTest {
 
-	@Autowired private PizzaDaoJdbcTemplate pizzaDaoJdbcTemplate;
-	
-	@Test
-	public void testFindAllPizzas() throws DaoException {
-		List<Pizza> pizzas = pizzaDaoJdbcTemplate.findAllPizzas();
-		Assert.assertEquals(9, pizzas.size());
+	@Autowired
+	public void setPizzaDao(@Qualifier("pizzaDaoJdbcTemplate") IPizzaDao pizzaDao) {
+		this.pizzaDao = pizzaDao;
 	}
-	
-	@Test
-	public void testInsertPizza() throws DaoException {
-		List<Pizza> pizzas = pizzaDaoJdbcTemplate.findAllPizzas();
-		Assert.assertEquals(9, pizzas.size());
-	}
+
 }

@@ -11,6 +11,7 @@ import fr.pizzeria.dao.IPizzaDao;
 import fr.pizzeria.ihm.menu.option.AbstractOptionMenu;
 import fr.pizzeria.ihm.menu.option.AfficherPizzaTarifPlusEleveOptionMenu;
 import fr.pizzeria.ihm.menu.option.AjouterNouvellePizzaOptionMenu;
+import fr.pizzeria.ihm.menu.option.ImporterBaseDeDonneesOptionMenu;
 import fr.pizzeria.ihm.menu.option.ListerPizzaGroupeParCategorieOptionMenu;
 import fr.pizzeria.ihm.menu.option.ListerPizzaOptionMenu;
 import fr.pizzeria.ihm.menu.option.MettreAJourPizzaOptionMenu;
@@ -38,6 +39,7 @@ public class Menu {
 		options.put(4, new SupprimerPizzaOptionMenu(scanner, pizzaDao));
 		options.put(5, new ListerPizzaGroupeParCategorieOptionMenu(pizzaDao));
 		options.put(6, new AfficherPizzaTarifPlusEleveOptionMenu(pizzaDao));
+		options.put(7, new ImporterBaseDeDonneesOptionMenu(pizzaDao));
 		options.put(99, new QuitterOptionMenu());
 	}
 
