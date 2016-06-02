@@ -5,18 +5,20 @@ import java.util.Comparator;
 import java.util.List;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityTransaction;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
 import org.apache.commons.collections4.ListUtils;
+import org.apache.commons.lang3.NotImplementedException;
+import org.springframework.context.annotation.Lazy;
+import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import fr.pizzeria.exception.DaoException;
 import fr.pizzeria.model.Pizza;
 
-//@Repository
-//@Lazy
+@Repository
+@Lazy
 public class PizzaDaoJpaSpring implements IPizzaDao {
 //    private static final Logger LOG = Logger.;
 	
@@ -26,7 +28,6 @@ public class PizzaDaoJpaSpring implements IPizzaDao {
 	
 	public PizzaDaoJpaSpring() {
 		super();
-		;
 	}
 
 	@Override
@@ -80,6 +81,16 @@ public class PizzaDaoJpaSpring implements IPizzaDao {
 			list.forEach(em::persist);
 			
 		});
+	}
+	
+	@Override
+	@Transactional
+	public Pizza findOnePizza(String code) throws DaoException {
+		TypedQuery<Pizza> updateQuery = 
+				em.createQuery("select p from Pizza p where code=:code", Pizza.class);
+		updateQuery.setParameter("code", code);
+		Pizza p = updateQuery.getSingleResult();
+		return p;
 	}
 	
 }
