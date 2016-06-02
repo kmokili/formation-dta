@@ -75,9 +75,12 @@ public class PizzaDaoImpl implements IPizzaDao, Serializable{
 		
 		for (Pizza pizza : listPizzas) {
 			savePizza(pizza);
-		}
-
-		
+		}	
 	}
 
+	
+	@Override
+	public Pizza findOnePizza(String code) throws DaoException {
+		return pizzas.get(code);
+	}
 }
