@@ -10,7 +10,7 @@ import javax.annotation.PostConstruct;
 import javax.ejb.Stateless;
 
 import javax.persistence.EntityManager;
-
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
@@ -75,6 +75,14 @@ public class PizzaService implements Serializable{
 	public void saveAllPizzas(List<Pizza> listPizzas, int nb) throws DaoException {
 		for(Pizza pizza : listPizzas) {
 			savePizza(pizza);
+		}
+	}
+	
+	public Pizza findOnePizza(String code) throws DaoException {
+		try {
+			return em.createQuery("select p from Pizza p where code=:code", Pizza.class).setParameter("code", code).getSingleResult();
+		} catch(NoResultException e) {
+			throw new DaoException(e);
 		}
 	}
 	/*

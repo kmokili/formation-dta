@@ -32,7 +32,7 @@ public class Pizza {
 	private BigDecimal prix;
 	@ToString @Enumerated(EnumType.STRING)
 	private CategoriePizza categorie;
-	private String url_image;
+	private String urlImage;
 	
 	
 	public static int nbPizzas;
@@ -51,13 +51,24 @@ public class Pizza {
 	}
 
 	public Pizza(String code, String nom, BigDecimal prix, 
-			CategoriePizza cat, String url_image) {
+			CategoriePizza cat, String urlImage) {
 		this();
 		this.code = code;
 		this.nom = nom;
 		this.prix = prix;
 		this.categorie = cat;
-		this.url_image = url_image;
+		this.urlImage = urlImage;
+	}
+
+	public Pizza(Integer id, String code, String nom, 
+			BigDecimal prix, CategoriePizza cat, String urlImage) {
+		this();
+		this.id = id;
+		this.code = code;
+		this.nom = nom;
+		this.prix = prix;
+		this.categorie = cat;
+		this.urlImage = urlImage;
 	}
 
 	public Integer getId() {
@@ -112,11 +123,11 @@ public class Pizza {
 	
 	
 	public String getUrl_image() {
-		return url_image;
+		return urlImage;
 	}
 
 	public void setUrl_image(String url_image) {
-		this.url_image = url_image;
+		this.urlImage = url_image;
 	}
 	
 	
