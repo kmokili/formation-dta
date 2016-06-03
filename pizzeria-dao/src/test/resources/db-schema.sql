@@ -7,3 +7,12 @@ CREATE TABLE IF NOT EXISTS `pizza` (
   `url_image` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
 );
+
+CREATE TABLE IF NOT EXISTS `performance` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `service` varchar(255) DEFAULT NULL,
+  `date` date DEFAULT NULL,
+  `temps_execution` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+);
+
