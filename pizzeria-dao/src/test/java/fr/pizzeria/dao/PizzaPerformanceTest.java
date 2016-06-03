@@ -24,7 +24,7 @@ import fr.pizzeria.model.Performance;
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 public class PizzaPerformanceTest {
 
-    @Autowired @Qualifier("pizzaDaoJpaData") IPizzaDao pizzaDao;
+    @Autowired @Qualifier("pizzaDaoJpaSpring") IPizzaDao pizzaDao;
     @Autowired IPerformanceRepository performanceRepository;
 
     @Test
