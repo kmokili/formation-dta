@@ -1,7 +1,5 @@
 package fr.pizzeria.dao.aspects;
 
-import java.time.Duration;
-import java.time.LocalDateTime;
 import java.util.Calendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -22,29 +20,9 @@ public class PizzaPerformance {
 	
 	private static final Logger LOG = Logger.getLogger(PizzaPerformance.class.toString());
 	
-//	@Around("execution(* fr.pizzeria.dao.IPizzaDao.*(..))")
-//	public void profilerCreate(ProceedingJoinPoint pjp) throws Throwable {
-//		LOG.log(Level.INFO, "Entrée dans l'aspect PizzaPerformance");
-//		
-//		
-//		// noter le temps de départ
-//		LocalDateTime debut = LocalDateTime.now();
-//		Object valeurRetournee = pjp.proceed();
-//		String service = pjp.getSignature().toString();
-//		
-//		LOG.log(Level.INFO, "Hell Yeah ! service = " + service);
-//		/**
-//		 *  @TODO récupérer le nom du service (méthode)
-//		 */
-//		
-//		// noter le temps de fin et calculer le temps d’exécution
-//		LocalDateTime fin = LocalDateTime.now();
-//		Long duree = Duration.between(debut, fin).toMillis() ;
-////		Performance perf = new Performance(service, debut, duree);
-//	}
 	
 	@Around("execution(* fr.pizzeria.dao.IPizzaDao.*(..))")
-	public void profilerCreate(ProceedingJoinPoint pjp) throws Throwable {
+	public Object profilerCreate(ProceedingJoinPoint pjp) throws Throwable {
 		LOG.log(Level.INFO, "Entrée dans l'aspect PizzaPerformance");
 		long start = System.currentTimeMillis();
 		
@@ -60,7 +38,7 @@ public class PizzaPerformance {
 		perf.setDate(Calendar.getInstance().getTime());
 		
 		perfRepository.save(perf);
-		
+		return obj;
 	}
 	
 }
