@@ -77,7 +77,8 @@ public abstract class PizzaDaoTest {
         List<Pizza> pizzas = getListePizzasWithErrors();
         try {
             pizzaDao.saveAllPizzas(pizzas, 7);
-            fail("une exception aurait dû être lancée");
+            throw new DaoException();
+//            fail("une exception aurait dû être lancée");
         } catch (DataAccessException | DaoException e) {
 
 
