@@ -3,11 +3,18 @@ package fr.pizzeria.model;
 import java.time.Duration;
 import java.time.LocalDateTime;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity
 public class Performance {
+	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
 	private String service;
 	private LocalDateTime date;
-	private Duration tempsExecution;
+	private Long tempsExecution;
 	
 	
 	/**
@@ -24,7 +31,7 @@ public class Performance {
 	 * @param date : la date/heure de la mesure
 	 * @param tempsExecution : le temps d’exécution en ms
 	 */
-	public Performance(String service, LocalDateTime date, Duration tempsExecution) {
+	public Performance(String service, LocalDateTime date, Long tempsExecution) {
 		super();
 		
 		this.service = service;
@@ -39,7 +46,7 @@ public class Performance {
 	 * @param date : la date/heure de la mesure
 	 * @param tempsExecution : le temps d’exécution en ms
 	 */
-	public Performance(Integer id, String service, LocalDateTime date, Duration tempsExecution) {
+	public Performance(Integer id, String service, LocalDateTime date, Long tempsExecution) {
 		super();
 		this.id = id;
 		this.service = service;
@@ -78,12 +85,12 @@ public class Performance {
 	}
 
 
-	public Duration getTempsExecution() {
+	public Long getTempsExecution() {
 		return tempsExecution;
 	}
 
 
-	public void setTempsExecution(Duration tempsExecution) {
+	public void setTempsExecution(Long tempsExecution) {
 		this.tempsExecution = tempsExecution;
 	}
 	
