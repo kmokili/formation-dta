@@ -8,11 +8,12 @@ CREATE TABLE IF NOT EXISTS `pizza` (
   PRIMARY KEY (`id`)
 );
 
+ALTER TABLE `pizza` ADD CONSTRAINT `code_unique` UNIQUE(`code`);
+
 CREATE TABLE IF NOT EXISTS `performance` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `service` varchar(255) DEFAULT NULL,
-  `date` date DEFAULT NULL,
+  `date` timestamp,
   `temps_execution` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
 );
-

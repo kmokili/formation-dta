@@ -16,32 +16,8 @@ import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
-@ComponentScan("fr.pizzera.dao")
-@EnableTransactionManagement
-@EnableJpaRepositories("fr.pizzeria.dao.repository")
 @EnableAspectJAutoProxy
 public class SpringAopConfig {
 
-	
-	
-	@Bean
-	public DataSource dataSource() {
-		return new EmbeddedDatabaseBuilder().
-	            setType(EmbeddedDatabaseType.H2).
-	            addScript("db-schema.sql").
-	            addScript("db-data.sql").
-	            build();
-	}
-	
-	@Bean
-	public PlatformTransactionManager transactionManager() {
-		return new JpaTransactionManager();
-	}
-	
-	@Bean
-	public LocalEntityManagerFactoryBean entityManagerFactory() {
-		LocalEntityManagerFactoryBean v = new LocalEntityManagerFactoryBean();
-		v.setPersistenceUnitName("pizza-db");
-		return v;
-	}
+
 }
