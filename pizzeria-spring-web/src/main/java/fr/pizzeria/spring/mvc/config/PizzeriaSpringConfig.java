@@ -5,17 +5,31 @@ import javax.sql.DataSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalEntityManagerFactoryBean;
 import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.view.InternalResourceViewResolver;
+
+import fr.pizzeria.dao.IPizzaDao;
+import fr.pizzeria.dao.PizzaDaoImpl;
 
 @Configuration
 @EnableWebMvc
-@ComponentScan("fr.pizzeria.spring.mvc.controller")
+@ComponentScan({"fr.pizzeria.spring.mvc.controller", "fr.pizzeria.aspects"})
+@EnableAspectJAutoProxy
+@EnableJpaRepositories("fr.pizzeria.dao.repository")
 public class PizzeriaSpringConfig {
+	
+	 @Bean
+	 IPizzaDao pizzaDao() {
+	     return new PizzaDaoImpl();
+	 }
 
 	@Bean
 	public DataSource dataSource() {
@@ -37,4 +51,12 @@ public class PizzeriaSpringConfig {
 		v.setPersistenceUnitName("pizza-db");
 		return v;
 	}
+	
+	 @Bean
+	    ViewResolver viewResolver() {
+	        InternalResourceViewResolver vr = new InternalResourceViewResolver();
+	        vr.setPrefix("/WEB-INF/views/");
+	        vr.setSuffix(".jsp");
+	        return vr;
+	    }
 }
