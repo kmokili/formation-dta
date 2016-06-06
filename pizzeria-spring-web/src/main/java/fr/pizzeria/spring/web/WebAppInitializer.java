@@ -1,5 +1,8 @@
 package fr.pizzeria.spring.web;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRegistration;
@@ -12,10 +15,14 @@ import org.springframework.web.servlet.DispatcherServlet;
 import fr.pizzeria.spring.mvc.controller.PizzeriaSpringConfig;
 
 public class WebAppInitializer implements WebApplicationInitializer {
+	
+	private static final Logger LOG = Logger.getLogger(WebAppInitializer.class.toString());
 
 	@Override
 	public void onStartup(ServletContext servletContext) throws ServletException {
-		// TODO Auto-generated method stub
+		LOG.log(Level.INFO, "Démarrage du serveur");
+		
+		
 		// Initialisation du contexte Spring
 		AnnotationConfigWebApplicationContext webContext = new AnnotationConfigWebApplicationContext();
 		webContext.register(PizzeriaSpringConfig.class);
